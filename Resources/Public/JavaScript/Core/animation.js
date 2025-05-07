@@ -1,18 +1,18 @@
-// Warte auf das vollständige Laden aller Skripte, insbesondere GSAP
+// Wait for all scripts to fully load, especially GSAP
 document.addEventListener('DOMContentLoaded', () => {
-    // Warte einen kurzen Moment, um sicherzustellen, dass GSAP vollständig geladen ist
+    // Wait a moment to ensure GSAP is fully loaded
     setTimeout(() => {
-        // Die ES6-Imports werden durch globale Variablen ersetzt
+        // ES6 imports are replaced by global variables
         const gsap = window.gsap;
         const ScrollTrigger = window.gsap?.ScrollTrigger;
 
-        // Prüfen, ob GSAP global verfügbar ist
+        // Check if GSAP is globally available
         if (!gsap) {
             console.error('GSAP is not loaded. Please include GSAP library.');
             return;
         }
 
-        // Registriere ScrollTrigger, wenn verfügbar
+        // Register ScrollTrigger if available
         if (ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);
             console.log('GSAP ScrollTrigger registered successfully.');
@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         /**
-         * GSAP Animation für Content-Elemente
+         * GSAP Animation for content elements
          */
 
-        // Observer für Animationen erstellen
+        // Create observer for animations
         const createScrollTrigger = (element) => {
             if (!gsap) return;
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const ease = element.getAttribute('data-gsap-easing') || 'power2.out';
             const once = element.getAttribute('data-gsap-once') === 'true';
 
-            // Animation basierend auf dem Typ erstellen
+            // Create animation based on type
             let animation;
 
             switch(animationType) {
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                     break;
                 default:
-                    // Fallback zum fade-up
+                    // Fallback to fade-up
                     animation = {
                         y: 30,
                         opacity: 0,
@@ -137,33 +137,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
             }
 
-            // Verzögerung hinzufügen, falls vorhanden
+            // Add delay if present
             if (delay > 0) {
                 animation.delay = delay / 1000;
             }
 
             console.log('Applying animation to', element, 'with type', animationType, 'duration', animationDuration, 'delay', delay);
 
-            // ScrollTrigger-Konfiguration, wenn verfügbar
+            // ScrollTrigger configuration, if available
             if (ScrollTrigger) {
                 const scrollTrigger = {
                     trigger: element,
                     start: 'top 80%',
-                    toggleActions: once ? 'play none none none' : 'play reverse restart reset'
+                    // Modified toggleActions to trigger animations on scrolling up and down
+                    toggleActions: once ? 'play none none none' : 'play reverse play reverse'
                 };
 
-                // GSAP-Animation mit ScrollTrigger starten
+                // Start GSAP animation with ScrollTrigger
                 gsap.from(element, {
                     ...animation,
                     scrollTrigger: scrollTrigger
                 });
             } else {
-                // Fallback ohne ScrollTrigger
+                // Fallback without ScrollTrigger
                 gsap.from(element, animation);
             }
         };
 
-        // Alle zu animierenden Elemente finden und Animationen erstellen
+        // Find all elements to animate and create animations
         const initGSAPAnimations = () => {
             if (!gsap) return;
 
@@ -175,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Initialisierung
+        // Initialization
         initGSAPAnimations();
 
     }, 100);
