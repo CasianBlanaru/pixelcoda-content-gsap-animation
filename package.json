@@ -1,0 +1,27 @@
+{
+  "name": "pixelcoda-content-gsap-animation",
+  "version": "1.0.0",
+  "description": "`content_gsap_animation` is an extension for the TYPO3 content management system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CasianBlanaru/pixelcoda-content-gsap-animation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CasianBlanaru/pixelcoda-content-gsap-animation/issues"
+  },
+  "homepage": "https://github.com/CasianBlanaru/pixelcoda-content-gsap-animation#readme",
+  "devDependencies": {
+    "rollup": "^4.40.2"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0"
+  }
+}
