@@ -1,2 +1,2 @@
-# import default constants for content_animations
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:content_animations/Configuration/TypoScript/constants.typoscript">
+# import default constants for content_gsap_animation
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:content_gsap_animation/Configuration/TypoScript/constants.typoscript">

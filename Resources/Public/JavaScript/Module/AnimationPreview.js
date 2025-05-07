@@ -5,9 +5,9 @@ define([], () => {
     const AnimationPreview = {
         previewLabel: document.querySelector('#preview-content-animation .preview-label'),
         previewElement: document.querySelector('#preview-content-animation .ce-preview'),
-        animationSelectField: document.querySelector('[name*="[tx_content_animations_animation]"]'),
-        durationInputField: document.querySelector('[data-formengine-input-name*="[tx_content_animations_duration]"]'),
-        durationValueInputField: document.querySelector('[name*="[tx_content_animations_duration]"]'),
+        animationSelectField: document.querySelector('[name*="[tx_content_gsap_animation_animation]"]'),
+        durationInputField: document.querySelector('[data-formengine-input-name*="[tx_content_gsap_animation_duration]"]'),
+        durationValueInputField: document.querySelector('[name*="[tx_content_gsap_animation_duration]"]'),
         defaultPreviewDuration: 800,
         defaultPreviewDelay: 1000,
         currentAnimation: null,

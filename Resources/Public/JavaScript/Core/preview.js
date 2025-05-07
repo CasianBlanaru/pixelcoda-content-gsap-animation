@@ -6,9 +6,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     const previewElement = document.querySelector('.ce-preview');
-    const animationSelectField = document.querySelector('[name*="[tx_content_animations_animation]"]');
-    const durationInputField = document.querySelector('[data-formengine-input-name*="[tx_content_animations_duration]"]');
-    const durationValueInputField = document.querySelector('[name*="[tx_content_animations_duration]"]');
+    const animationSelectField = document.querySelector('[name*="[tx_content_gsap_animation_animation]"]');
+    const durationInputField = document.querySelector('[data-formengine-input-name*="[tx_content_gsap_animation_duration]"]');
+    const durationValueInputField = document.querySelector('[name*="[tx_content_gsap_animation_duration]"]');
     const gsap = window.gsap;
 
     console.log('GSAP Preview loaded', typeof gsap, previewElement, animationSelectField);

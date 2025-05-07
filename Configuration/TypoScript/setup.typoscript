@@ -1,15 +1,15 @@
-# Default definition for content_animations
-plugin.tx_content_animations {
+# Default definition for content_gsap_animation
+plugin.tx_content_gsap_animation {
     variables {
         # GSAP options
         gsap-easing = TEXT
-        gsap-easing.value = {$plugin.tx_content_animations.gsap-easing}
+        gsap-easing.value = {$plugin.tx_content_gsap_animation.gsap-easing}
 
         gsap-once = TEXT
-        gsap-once.value = {$plugin.tx_content_animations.gsap-once}
+        gsap-once.value = {$plugin.tx_content_gsap_animation.gsap-once}
 
         gsap-duration = TEXT
-        gsap-duration.value = {$plugin.tx_content_animations.gsap-duration}
+        gsap-duration.value = {$plugin.tx_content_gsap_animation.gsap-duration}
     }
 
     dataProcessing {

@@ -35,10 +35,10 @@ class AnimationSettingsProcessorTest extends FunctionalTestCase
     public function processorGeneratesCorrectDataAttributes(): void
     {
         $data = [
-            'tx_content_animations_animation' => 'fade-up',
-            'tx_content_animations_duration' => '800',
-            'tx_content_animations_delay' => '0',
-            'tx_content_animations_easing' => 'power2.out',
+            'tx_content_gsap_animation_animation' => 'fade-up',
+            'tx_content_gsap_animation_duration' => '800',
+            'tx_content_gsap_animation_delay' => '0',
+            'tx_content_gsap_animation_easing' => 'power2.out',
         ];
 
         $processedData = ['data' => $data];
@@ -63,9 +63,9 @@ class AnimationSettingsProcessorTest extends FunctionalTestCase
     public function processorHandlesPartialDataAttributes(): void
     {
         $data = [
-            'tx_content_animations_animation' => 'fade-up',
+            'tx_content_gsap_animation_animation' => 'fade-up',
             // duration and delay intentionally left out
-            'tx_content_animations_easing' => 'power2.out',
+            'tx_content_gsap_animation_easing' => 'power2.out',
         ];
 
         $processedData = ['data' => $data];
@@ -90,7 +90,7 @@ class AnimationSettingsProcessorTest extends FunctionalTestCase
     public function processorSetsCustomVariableNameIfConfigured(): void
     {
         $data = [
-            'tx_content_animations_animation' => 'fade-up',
+            'tx_content_gsap_animation_animation' => 'fade-up',
         ];
 
         $processedData = ['data' => $data];
@@ -113,8 +113,8 @@ class AnimationSettingsProcessorTest extends FunctionalTestCase
     public function processorEscapesHtmlSpecialChars(): void
     {
         $data = [
-            'tx_content_animations_animation' => 'fade-up',
-            'tx_content_animations_easing' => 'power2.out"><script>alert("XSS")</script>',
+            'tx_content_gsap_animation_animation' => 'fade-up',
+            'tx_content_gsap_animation_easing' => 'power2.out"><script>alert("XSS")</script>',
         ];
 
         $processedData = ['data' => $data];

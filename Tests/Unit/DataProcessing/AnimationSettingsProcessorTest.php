@@ -29,10 +29,10 @@ class AnimationSettingsProcessorTest extends TestCase
 
         // Set up test data
         $data = [
-            'tx_content_animations_animation' => 'fade-up',
-            'tx_content_animations_duration' => '800',
-            'tx_content_animations_delay' => '0',
-            'tx_content_animations_easing' => 'power2.out',
+            'tx_content_gsap_animation_animation' => 'fade-up',
+            'tx_content_gsap_animation_duration' => '800',
+            'tx_content_gsap_animation_delay' => '0',
+            'tx_content_gsap_animation_easing' => 'power2.out',
         ];
 
         $processedData = ['data' => $data];
@@ -64,8 +64,8 @@ class AnimationSettingsProcessorTest extends TestCase
 
         // Set up test data
         $data = [
-            'tx_content_animations_animation' => 'fade-up',
-            'tx_content_animations_duration' => '800',
+            'tx_content_gsap_animation_animation' => 'fade-up',
+            'tx_content_gsap_animation_duration' => '800',
         ];
 
         $processedData = ['data' => $data];
