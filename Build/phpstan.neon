@@ -1,0 +1,21 @@
+includes:
+	- %currentWorkingDirectory%/.build/vendor/phpstan/phpstan-phpunit/extension.neon
+	- %currentWorkingDirectory%/.build/vendor/phpstan/phpstan-strict-rules/rules.neon
+	- %currentWorkingDirectory%/.build/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- %currentWorkingDirectory%/.build/vendor/friendsoftypo3/phpstan-typo3/extension.neon
+	- phpstan-baseline.neon
+
+parameters:
+	level: 5
+	paths:
+		- ../Classes/
+	excludePaths:
+		- ../Resources/
+	ignoreErrors:
+		- "#Call to an undefined method TYPO3\\CMS\\Core\\Configuration\\ExtensionConfiguration::get\\(\\)#"
+		- "#Call to an undefined method TYPO3\\CMS\\Core\\Utility\\GeneralUtility::makeInstance\\(\\)#"
+		- "#Casting to string something that's already string.#"
+		- "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
+	reportUnmatchedIgnoredErrors: false
+	checkGenericClassInNonGenericObjectType: false
+	checkMissingIterableValueType: false

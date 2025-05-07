@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-02-25T12:00:00Z" product-name="content_animations">
+		<header/>
+		<body>
+			<trans-unit id="tab.animation" xml:space="preserve">
+				<source>Animation</source>
+			</trans-unit>
+
+			<trans-unit id="palette.animation-settings" xml:space="preserve">
+				<source>Animation settings</source>
+			</trans-unit>
+
+			<trans-unit id="palette.timing-settings" xml:space="preserve">
+				<source>Timing settings</source>
+			</trans-unit>
+
+			<trans-unit id="palette.extended-settings" xml:space="preserve">
+				<source>Extended animation settings</source>
+			</trans-unit>
+
+			<trans-unit id="label.animation" xml:space="preserve">
+				<source>Animation</source>
+			</trans-unit>
+
+			<trans-unit id="label.duration" xml:space="preserve">
+				<source>Duration in milliseconds</source>
+			</trans-unit>
+
+			<trans-unit id="label.delay" xml:space="preserve">
+				<source>Delay in milliseconds</source>
+			</trans-unit>
+
+			<trans-unit id="label.offset" xml:space="preserve">
+				<source>Offset in pixels</source>
+			</trans-unit>
+
+			<trans-unit id="label.easing" xml:space="preserve">
+				<source>Easing</source>
+			</trans-unit>
+
+			<trans-unit id="label.once" xml:space="preserve">
+				<source>Play animation once</source>
+			</trans-unit>
+
+			<trans-unit id="desc.once" xml:space="preserve">
+				<source>Whether animation should happen only once - while scrolling down</source>
+			</trans-unit>
+
+			<trans-unit id="label.mirror" xml:space="preserve">
+				<source>Mirror</source>
+			</trans-unit>
+
+			<trans-unit id="desc.mirror" xml:space="preserve">
+				<source>Animations animates out while scrolling past them</source>
+			</trans-unit>
+
+			<trans-unit id="label.anchor-placement" xml:space="preserve">
+				<source>Anchor placement</source>
+			</trans-unit>
+
+			<trans-unit id="item.no-animation" xml:space="preserve">
+				<source>No animation</source>
+			</trans-unit>
+
+			<trans-unit id="item.default" xml:space="preserve">
+				<source>Default</source>
+			</trans-unit>
+
+			<trans-unit id="item.fade-animations" xml:space="preserve">
+				<source>Fade animations:</source>
+			</trans-unit>
+
+			<trans-unit id="item.flip-animations" xml:space="preserve">
+				<source>Flip animations:</source>
+			</trans-unit>
+
+			<trans-unit id="item.slide-animations" xml:space="preserve">
+				<source>Slide animations:</source>
+			</trans-unit>
+
+			<trans-unit id="item.zoom-animations" xml:space="preserve">
+				<source>Zoom animations:</source>
+			</trans-unit>
+
+			<trans-unit id="preview-label" xml:space="preserve">
+				<source>Preview</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

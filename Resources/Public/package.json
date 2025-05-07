@@ -1,0 +1,17 @@
+{
+  "name": "content-gsap-animation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js -w"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "rollup": "^4.40.2"
+  },
+  "dependencies": {
+    "@gsap/shockingly": "^3.12.5"
+  }
+}
