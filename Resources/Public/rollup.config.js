@@ -3,9 +3,9 @@ import commonjs from '@rollup/plugin-commonjs';
 
 export default [
   {
-    input: 'JavaScript/Core/preview.js',
+    input: 'Resources/Public/JavaScript/Core/preview.js',
     output: {
-      file: 'JavaScript/Bundle/preview.bundle.js',
+      file: 'Resources/Public/JavaScript/Bundle/preview.bundle.js',
       format: 'iife',
       name: 'contentAnimationsPreview',
       sourcemap: true,
@@ -20,9 +20,9 @@ export default [
     ]
   },
   {
-    input: 'JavaScript/Core/animation.js',
+    input: 'Resources/Public/JavaScript/Core/animation.js',
     output: {
-      file: 'JavaScript/Bundle/animation.bundle.js',
+      file: 'Resources/Public/JavaScript/Bundle/animation.bundle.js',
       format: 'iife',
       name: 'contentAnimations',
       sourcemap: true,
