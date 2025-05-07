@@ -8,7 +8,6 @@ return [
         'backend.form',
     ],
     'imports' => [
-        '@pixelcoda/content-gsap-animation/preview' => 'EXT:content_gsap_animation/Resources/Public/JavaScript/Bundle/preview.bundle.js',
         '@pixelcoda/content-gsap-animation/animation' => 'EXT:content_gsap_animation/Resources/Public/JavaScript/Bundle/animation.bundle.js',
     ],
 ];
