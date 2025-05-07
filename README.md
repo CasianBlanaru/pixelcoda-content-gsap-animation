@@ -15,8 +15,5 @@ Include the static TypoScript for `Content Animations: bootstrap_package v13, v1
 ### Extending
 `content_animations` comes with an extended `Default` fluid layout which adds the necessary markup to get the animations working. If you want to extend the layout just copy it to your extension, remove or update the content elements `layoutRootPaths` and you're good to go.
 
-### Thanks
-to **Michał Sajnóg** for his amazing [AOS](http://michalsnik.github.io/aos/) library which is forked and updated by **Benjamin Ammann** as [Simple-AOS](https://ammannbe.github.io/simple-aos/) which is included in `content_animations`.
-
 ## More Informations
 See the [official documentation](https://docs.typo3.org/p/pixelcoda/content-gsap-animation/main/en-us/) for more details how to implement content_animations
