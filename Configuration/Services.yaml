@@ -4,10 +4,10 @@ services:
     autoconfigure: true
     public: false
 
-  Baschte\ContentAnimations\:
+  Pixelcoda\ContentGsapAnimation\:
     resource: '../Classes/*'
 
-  Baschte\ContentAnimations\ContentObject\FileContentContentObject:
+  Pixelcoda\ContentGsapAnimation\ContentObject\FileContentContentObject:
     tags:
       - name: frontend.contentobject
         identifier: 'FILECONTENT'
