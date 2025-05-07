@@ -8,12 +8,14 @@ use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Form\Utility\FormEngineUtility;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Security\ContentSecurityPolicy\ConsumableNonce;
 
 /**
  * This file is part of the "content_gsap_animation" Extension for TYPO3 CMS.
@@ -25,6 +27,8 @@ use TYPO3\CMS\Core\Core\Environment;
  *
  * Class AnimationPreviewField
  */
+
+
 class AnimationPreviewField extends AbstractFormElement
 {
     /**
@@ -56,6 +60,16 @@ class AnimationPreviewField extends AbstractFormElement
             ],
         ],
     ];
+
+    /**
+     * Get the TYPO3 PageRenderer instance
+     *
+     * @return PageRenderer
+     */
+    protected function getPageRenderer(): PageRenderer
+    {
+        return GeneralUtility::makeInstance(PageRenderer::class);
+    }
 
     /**
      * This will render a checkbox or an array of checkboxes
@@ -218,22 +232,51 @@ class AnimationPreviewField extends AbstractFormElement
                 'EXT:content_gsap_animation/Resources/Public/Styles/animation-preview.min.css',            ],
         ];
 
-        if ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12) {
-            // Get correct web path to JS file in extension directory
-            $extensionPath = 'EXT:content_gsap_animation/Resources/Public/JavaScript/preview.bundle.js';
-            $absoluteFilePath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extensionPath);
+        // GSAP und ScrollTrigger als externe Skripte laden
+        $pageRenderer = $this->getPageRenderer();
 
-            // Ensure path is relative to web root (TYPO3 function)
-            $publicResourceWebPath = \TYPO3\CMS\Core\Utility\PathUtility::getPublicResourceWebPath($extensionPath);
+        // GSAP von CDN laden
+        $pageRenderer->addJsFooterLibrary(
+            'gsap',
+            'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+            'text/javascript',
+            false,
+            false,
+            '',
+            true
+        );
 
-            $result['javaScriptModules'][] = \TYPO3\CMS\Core\Page\JavaScriptModuleInstruction::create(
-                $publicResourceWebPath
-            );
-        } else {
-            $result['requireJsModules'] = [
-                'TYPO3/CMS/ContentGsapAnimation/AnimationPreview',
-            ];
-        }
+        // ScrollTrigger von CDN laden
+        $pageRenderer->addJsFooterLibrary(
+            'gsap_scrolltrigger',
+            'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+            'text/javascript',
+            false,
+            false,
+            '',
+            true,
+            '|defer',
+            false,
+            '',
+            'gsap'
+        );
+
+        // Preview-Bundle laden
+        $previewPath = 'EXT:content_gsap_animation/Resources/Public/JavaScript/Bundle/preview.bundle.js';
+        $previewAbsPath = GeneralUtility::getFileAbsFileName($previewPath);
+        $previewWebPath = PathUtility::getAbsoluteWebPath($previewAbsPath);
+
+        $pageRenderer->addJsFooterFile(
+            $previewWebPath,
+            'text/javascript',
+            false,
+            false,
+            '',
+            false,
+            '|defer',
+            false,
+            'gsap_scrolltrigger'
+        );
 
         return $result;
     }

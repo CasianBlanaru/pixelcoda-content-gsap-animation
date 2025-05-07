@@ -18,6 +18,7 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  *
  * DataProcessor to generate GSAP animation settings
  */
+
 class AnimationSettingsProcessor implements DataProcessorInterface
 {
     private const GSAP_ATTRIBUTE_MAP = [
