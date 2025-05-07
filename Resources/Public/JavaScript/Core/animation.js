@@ -2,9 +2,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Wait a moment to ensure GSAP is fully loaded
     setTimeout(() => {
-        // ES6 imports are replaced by global variables
+        // Get global GSAP references
         const gsap = window.gsap;
-        const ScrollTrigger = window.gsap?.ScrollTrigger;
 
         // Check if GSAP is globally available
         if (!gsap) {
@@ -12,12 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Register ScrollTrigger if available
+        // Get ScrollTrigger reference and register it if available
+        const ScrollTrigger = window.ScrollTrigger || gsap?.plugins?.ScrollTrigger || gsap.ScrollTrigger;
+
         if (ScrollTrigger) {
-            gsap.registerPlugin(ScrollTrigger);
-            console.log('GSAP ScrollTrigger registered successfully.');
-        } else {
-            console.warn('GSAP ScrollTrigger is not loaded. Fallback to simple animations.');
+            // Make sure ScrollTrigger is registered
+            if (typeof gsap.registerPlugin === 'function') {
+                gsap.registerPlugin(ScrollTrigger);
+            }
         }
 
         /**
@@ -142,9 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 animation.delay = delay / 1000;
             }
 
-            console.log('Applying animation to', element, 'with type', animationType, 'duration', animationDuration, 'delay', delay);
-
-            // ScrollTrigger configuration, if available
+            // Use ScrollTrigger if available, otherwise fallback to simple animation
             if (ScrollTrigger) {
                 const scrollTrigger = {
                     trigger: element,
@@ -169,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!gsap) return;
 
             const animatedElements = document.querySelectorAll('[data-gsap-anim]');
-            console.log('Found', animatedElements.length, 'elements to animate');
 
             for (const element of animatedElements) {
                 createScrollTrigger(element);
