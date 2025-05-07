@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <!-- Hintergrund -->
+  <rect width="16" height="16" rx="2" fill="#2E5BFF"/>
+
+  <!-- Animationslinien - Wellen -->
+  <path d="M2 7.5 C4 5.5, 6 4.5, 8 7.5 S12 10.5, 14 8.5" stroke="#A1AFFF" stroke-width="0.75" fill="none" stroke-linecap="round"/>
+  <path d="M2 10 C4 8, 6 7, 8 10 S12 13, 14 11" stroke="#A1AFFF" stroke-width="0.75" fill="none" stroke-linecap="round"/>
+  <path d="M2 5 C4 3, 6 2, 8 5 S12 8, 14 6" stroke="#A1AFFF" stroke-width="0.75" fill="none" stroke-linecap="round"/>
+
+</svg>

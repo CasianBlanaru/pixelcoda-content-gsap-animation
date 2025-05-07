@@ -1,0 +1,31 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to method stdWrapValue\\(\\) on an unknown class TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\.$#"
+			count: 1
+			path: ../Classes/DataProcessing/AnimationSettingsProcessor.php
+
+		-
+			message: "#^Parameter \\$cObj of method Pixelcoda\\\\ContentGsapAnimation\\\\DataProcessing\\\\AnimationSettingsProcessor\\:\\:process\\(\\) has invalid type TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\.$#"
+			count: 1
+			path: ../Classes/DataProcessing/AnimationSettingsProcessor.php
+
+		-
+			message: "#^Parameter \\$cObj of method Pixelcoda\\\\ContentGsapAnimation\\\\DataProcessing\\\\AnimationSettingsProcessor\\:\\:setSettingsToProcessedData\\(\\) has invalid type TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\.$#"
+			count: 1
+			path: ../Classes/DataProcessing/AnimationSettingsProcessor.php
+
+		-
+			message: "#^Call to method getIconHtml\\(\\) on an unknown class TYPO3\\\\CMS\\\\Backend\\\\Form\\\\Utility\\\\FormEngineUtility\\.$#"
+			count: 1
+			path: ../Classes/Form/Elements/AnimationPreviewField.php
+
+		-
+			message: "#^Parameter \\$config of method Pixelcoda\\\\ContentGsapAnimation\\\\Form\\\\Elements\\\\AnimationPreviewField\\:\\:getValidationDataAsJsonString\\(\\) has invalid type array\\<string, mixed\\>\\.$#"
+			count: 1
+			path: ../Classes/Form/Elements/AnimationPreviewField.php
+
+		-
+			message: "#^Class TYPO3\\\\CMS\\\\Frontend\\\\Resource\\\\FilePathSanitizer not found\\.$#"
+			count: 1
+			path: ../Classes/ContentObject/FileContentContentObject.php
