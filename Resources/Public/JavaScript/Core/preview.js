@@ -1,7 +1,3 @@
-// Verwende window.gsap statt Import
-// Die ES6-Imports werden durch globale Variablen ersetzt
-// Wird durch das Rollup-Bundle gelöst
-
 // GSAP Animation Preview
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
