@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE') && !defined('TYPO3')) {
 }
 
 $tempColumns = [
-    'tx_content_animations_animation' => [
+    'tx_content_gsap_animation_animation' => [
         'exclude' => true,
         'label' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.animation',
         'config' => [
@@ -47,7 +47,7 @@ $tempColumns = [
             'size' => 1,
         ],
     ],
-    'tx_content_animations_duration' => [
+    'tx_content_gsap_animation_duration' => [
         'exclude' => true,
         'label' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.duration',
         'config' => [
@@ -65,7 +65,7 @@ $tempColumns = [
             ],
         ],
     ],
-    'tx_content_animations_delay' => [
+    'tx_content_gsap_animation_delay' => [
         'exclude' => true,
         'label' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.delay',
         'config' => [
@@ -84,7 +84,7 @@ $tempColumns = [
         ],
     ],
 
-    'tx_content_animations_offset' => [
+    'tx_content_gsap_animation_offset' => [
         'exclude' => true,
         'label' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.offset',
         'config' => [
@@ -95,7 +95,7 @@ $tempColumns = [
         ],
     ],
 
-    'tx_content_animations_anchor_placement' => [
+    'tx_content_gsap_animation_anchor_placement' => [
         'exclude' => true,
         'label' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.anchor-placement',
         'config' => [
@@ -116,7 +116,7 @@ $tempColumns = [
             ],
         ],
     ],
-    'tx_content_animations_once' => [
+    'tx_content_gsap_animation_once' => [
         'exclude' => true,
         'label' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.once',
         'description' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:desc.once',
@@ -126,7 +126,7 @@ $tempColumns = [
             'default' => 1,
         ],
     ],
-    'tx_content_animations_mirror' => [
+    'tx_content_gsap_animation_mirror' => [
         'exclude' => true,
         'label' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.mirror',
         'description' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:desc.mirror',
@@ -136,7 +136,7 @@ $tempColumns = [
             'default' => 0,
         ],
     ],
-    'tx_content_animations_easing' => [
+    'tx_content_gsap_animation_easing' => [
         'exclude' => true,
         'label' => 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.easing',
         'config' => [
@@ -170,29 +170,29 @@ $tempColumns = [
 ];
 
 // Add animation palettes
-$GLOBALS['TCA']['tt_content']['palettes']['tx_content_animations_animation'] = [
-    'showitem' => 'tx_content_animations_animation',
+$GLOBALS['TCA']['tt_content']['palettes']['tx_content_gsap_animation_animation'] = [
+    'showitem' => 'tx_content_gsap_animation_animation',
 ];
 
 // Add animation timing palette
-$GLOBALS['TCA']['tt_content']['palettes']['tx_content_animations_timing'] = [
+$GLOBALS['TCA']['tt_content']['palettes']['tx_content_gsap_animation_timing'] = [
     'showitem' => '
-        tx_content_animations_duration,
-        tx_content_animations_delay
+        tx_content_gsap_animation_duration,
+        tx_content_gsap_animation_delay
     ',
 ];
 
 // Add extended animations palette
-$GLOBALS['TCA']['tt_content']['palettes']['tx_content_animations_extended'] = [
+$GLOBALS['TCA']['tt_content']['palettes']['tx_content_gsap_animation_extended'] = [
     'showitem' => '
-        tx_content_animations_once,
-        tx_content_animations_mirror,
+        tx_content_gsap_animation_once,
+        tx_content_gsap_animation_mirror,
         --linebreak--,
-        tx_content_animations_easing,
+        tx_content_gsap_animation_easing,
         --linebreak--,
-        tx_content_animations_anchor_placement,
+        tx_content_gsap_animation_anchor_placement,
         --linebreak--,
-        tx_content_animations_offset
+        tx_content_gsap_animation_offset
     ',
 ];
 

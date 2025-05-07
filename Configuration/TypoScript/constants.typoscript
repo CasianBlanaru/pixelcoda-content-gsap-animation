@@ -3,7 +3,7 @@
 ###########################
 # customsubcategory=67235476=Animation settings
 
-plugin.tx_content_animations {
+plugin.tx_content_gsap_animation {
     # cat=content animations/67235476/; type=options[power0=power0,power1=power1,power2=power2,power3=power3,power4=power4,back=back,elastic=elastic,bounce=bounce,circ=circ,expo=expo,sine=sine]; label=Default easing für GSAP-Animationen
     gsap-easing = power2
 

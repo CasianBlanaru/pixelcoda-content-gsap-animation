@@ -19,11 +19,11 @@ The following global TypoScript constants are available:
 +----------------------------------------------+---------------+-------------------------------------------------------------------+---------------+
 | Parameter                                    | Data Type     | Description                                                       | Default       |
 +==============================================+===============+===================================================================+===============+
-| plugin.tx_content_animations.gsap-easing     | option        | Global easing for all animations                                  | power2.out    |
+| plugin.tx_content_gsap_animation.gsap-easing     | option        | Global easing for all animations                                  | power2.out    |
 +----------------------------------------------+---------------+-------------------------------------------------------------------+---------------+
-| plugin.tx_content_animations.gsap-once       | boolean       | Should the animation play only once                              | true          |
+| plugin.tx_content_gsap_animation.gsap-once       | boolean       | Should the animation play only once                              | true          |
 +----------------------------------------------+---------------+-------------------------------------------------------------------+---------------+
-| plugin.tx_content_animations.gsap-duration   | integer       | Default duration of the animation in milliseconds                 | 800           |
+| plugin.tx_content_gsap_animation.gsap-duration   | integer       | Default duration of the animation in milliseconds                 | 800           |
 +----------------------------------------------+---------------+-------------------------------------------------------------------+---------------+
 
 

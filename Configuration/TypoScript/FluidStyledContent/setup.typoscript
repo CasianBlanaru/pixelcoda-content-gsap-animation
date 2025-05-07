@@ -1,13 +1,13 @@
-# import default setup for content_animations
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:content_animations/Configuration/TypoScript/setup.typoscript">
+# import default setup for content_gsap_animation
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:content_gsap_animation/Configuration/TypoScript/setup.typoscript">
 
 # support for fluid_styled_content
 lib.contentElement {
-    layoutRootPaths.100 = EXT:content_animations/Resources/Private/Layouts/FluidStyledContent/
+    layoutRootPaths.100 = EXT:content_gsap_animation/Resources/Private/Layouts/FluidStyledContent/
     variables {
-        gsap-easing < plugin.tx_content_animations.variables.gsap-easing
-        gsap-once < plugin.tx_content_animations.variables.gsap-once
-        gsap-duration < plugin.tx_content_animations.variables.gsap-duration
+        gsap-easing < plugin.tx_content_gsap_animation.variables.gsap-easing
+        gsap-once < plugin.tx_content_gsap_animation.variables.gsap-once
+        gsap-duration < plugin.tx_content_gsap_animation.variables.gsap-duration
     }
-    dataProcessing.78911002 < plugin.tx_content_animations.dataProcessing.78911002
+    dataProcessing.78911002 < plugin.tx_content_gsap_animation.dataProcessing.78911002
 }

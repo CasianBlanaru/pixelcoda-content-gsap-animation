@@ -26,7 +26,7 @@ class AnimationSettingsProcessor implements DataProcessorInterface
         'delay' => 'data-gsap-delay',
         'easing' => 'data-gsap-easing',
     ];
-    private const DATA_COLUMN_PREFIX = 'tx_content_animations_';
+    private const DATA_COLUMN_PREFIX = 'tx_content_gsap_animation_';
 
     /**
      * @var array<string>
