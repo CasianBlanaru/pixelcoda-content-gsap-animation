@@ -6,8 +6,6 @@
 
 ### What does it do
 It allows you to set frontend animations to your content if its scrolled into the browsers viewport with bidirectional animation support (animations play in reverse when scrolling back up).\
-\
-![example of content_gsap_animation](https://raw.githubusercontent.com/pixelcoda/content-gsap-animation/master/Documentation/Images/Example.gif)
 
 ### Dependencies
 The extension is developed and tested with TYPO3 12.4 until 13.4 LTS. It has an out of the box `bootstrap_package v13, v14 and v15` and `fluid_styled_content` support.
