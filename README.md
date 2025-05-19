@@ -4,9 +4,10 @@ GSAP (GreenSock Animation Platform) powered animations for your TYPO3 content el
 
 <img src="ext_icon.svg" alt="Content GSAP Animation Icon" width="100" height="100"/>
 
+### What does it do
+
 `content_gsap_animation` is an extension for the TYPO3 content management system.
 
-### What does it do
 It allows you to set frontend animations to your content if its scrolled into the browsers viewport with bidirectional animation support (animations play in reverse when scrolling back up).\
 
 ### Dependencies
