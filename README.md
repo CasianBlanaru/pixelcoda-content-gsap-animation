@@ -1,4 +1,7 @@
 # Content GSAP Animation
+
+<img src="ext_icon.svg" alt="Content GSAP Animation Icon" width="100" height="100"/>
+
 `content_gsap_animation` is an extension for the TYPO3 content management system.
 
 ### What does it do
