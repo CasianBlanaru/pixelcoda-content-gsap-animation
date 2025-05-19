@@ -42,10 +42,11 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php'][
             'EXT:content_gsap_animation/Resources/Public/JavaScript/Vendor/gsap/ScrollTrigger.min.js'
         );
 
+        // Get web paths for GSAP resources
         $gsapWebPath = \TYPO3\CMS\Core\Utility\PathUtility::getAbsoluteWebPath($gsapPath);
         $scrollTriggerWebPath = \TYPO3\CMS\Core\Utility\PathUtility::getAbsoluteWebPath($scrollTriggerPath);
 
-        // GSAP und ScrollTrigger
+        // GSAP and ScrollTrigger
         $params['pageRenderer']->addJsFooterFile(
             $gsapWebPath,
             'text/javascript',
