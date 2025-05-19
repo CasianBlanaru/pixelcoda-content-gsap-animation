@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('GSAP Preview loaded', typeof gsap, previewElement, animationSelectField);
 
     if (!gsap) {
-      console.error('GSAP nicht geladen. Bitte GSAP-Bibliothek hinzufügen.');
+      console.error('GSAP not loaded. Please add GSAP library.');
       return;
     }
 
@@ -100,5 +100,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initialize();
-  }, 100); // Kurze Verzögerung für die Initialisierung
+  }, 100); // Short delay for initialization
 });

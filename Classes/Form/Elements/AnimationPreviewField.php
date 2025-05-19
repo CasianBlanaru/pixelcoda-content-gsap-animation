@@ -232,13 +232,25 @@ class AnimationPreviewField extends AbstractFormElement
                 'EXT:content_gsap_animation/Resources/Public/Styles/animation-preview.min.css',            ],
         ];
 
-        // GSAP und ScrollTrigger als externe Skripte laden
+        // Load GSAP and ScrollTrigger
         $pageRenderer = $this->getPageRenderer();
 
-        // GSAP von CDN laden
+        // Get file paths for local GSAP resources
+        $gsapPath = GeneralUtility::getFileAbsFileName(
+            'EXT:content_gsap_animation/Resources/Public/JavaScript/Vendor/gsap/gsap.min.js'
+        );
+        $scrollTriggerPath = GeneralUtility::getFileAbsFileName(
+            'EXT:content_gsap_animation/Resources/Public/JavaScript/Vendor/gsap/ScrollTrigger.min.js'
+        );
+
+        // Get web paths for GSAP resources
+        $gsapWebPath = PathUtility::getAbsoluteWebPath($gsapPath);
+        $scrollTriggerWebPath = PathUtility::getAbsoluteWebPath($scrollTriggerPath);
+
+        // Load GSAP
         $pageRenderer->addJsFooterLibrary(
             'gsap',
-            'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+            $gsapWebPath,
             'text/javascript',
             false,
             false,
@@ -246,10 +258,10 @@ class AnimationPreviewField extends AbstractFormElement
             true
         );
 
-        // ScrollTrigger von CDN laden
+        // Load ScrollTrigger
         $pageRenderer->addJsFooterLibrary(
             'gsap_scrolltrigger',
-            'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+            $scrollTriggerWebPath,
             'text/javascript',
             false,
             false,
@@ -261,10 +273,11 @@ class AnimationPreviewField extends AbstractFormElement
             'gsap'
         );
 
-        // Preview-Bundle laden
-        $previewPath = 'EXT:content_gsap_animation/Resources/Public/JavaScript/Bundle/preview.bundle.js';
-        $previewAbsPath = GeneralUtility::getFileAbsFileName($previewPath);
-        $previewWebPath = PathUtility::getAbsoluteWebPath($previewAbsPath);
+        // Load Preview-Bundle
+        $previewPath = GeneralUtility::getFileAbsFileName(
+            'EXT:content_gsap_animation/Resources/Public/JavaScript/Bundle/preview.bundle.js'
+        );
+        $previewWebPath = PathUtility::getAbsoluteWebPath($previewPath);
 
         $pageRenderer->addJsFooterFile(
             $previewWebPath,
