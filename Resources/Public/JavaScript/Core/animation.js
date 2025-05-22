@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check if GSAP is globally available
         if (!gsap) {
-            console.error('GSAP is not loaded. Please include GSAP library.');
+            console.error('GSAP is not loaded. Please include the GSAP library.');
             return;
         }
 
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                     break;
                 default:
-                    // Fallback to fade-up
+                    // Fall back to fade-up
                     animation = {
                         y: 30,
                         opacity: 0,
@@ -143,16 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 animation.delay = delay / 1000;
             }
 
-            // Use ScrollTrigger if available, otherwise fallback to simple animation
+            // Use ScrollTrigger if available, otherwise fall back to simple animation
             if (ScrollTrigger) {
                 const scrollTrigger = {
                     trigger: element,
                     start: 'top 80%',
-                    end: 'bottom 20%',
-                    // Modified toggleActions to ensure smooth animations in both directions
-                    toggleActions: once ? 'play none none none' : 'play reverse play reverse',
-                    // Add scrub option for smoother transitions when scrolling
-                    scrub: once ? false : 0.5
+                    // Modified toggleActions for better animations in both directions
+                    // First value: onEnter, Second: onLeave, Third: onEnterBack, Fourth: onLeaveBack
+                    toggleActions: once ? 'play none none none' : 'play none play none'
                 };
 
                 // Start GSAP animation with ScrollTrigger
@@ -161,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     scrollTrigger: scrollTrigger
                 });
             } else {
-                // Fallback without ScrollTrigger
+                // Fall back without ScrollTrigger
                 gsap.from(element, animation);
             }
         };
