@@ -162,8 +162,11 @@ var contentAnimations = (function () {
 		                const scrollTrigger = {
 		                    trigger: element,
 		                    start: 'top 80%',
-		                    // Modified toggleActions to trigger animations on scrolling up and down
-		                    toggleActions: once ? 'play none none none' : 'play reverse play reverse'
+		                    end: 'bottom 20%',
+		                    // Modified toggleActions to ensure smooth animations in both directions
+		                    toggleActions: once ? 'play none none none' : 'play reverse play reverse',
+		                    // Add scrub option for smoother transitions when scrolling
+		                    scrub: once ? false : 0.5
 		                };
 
 		                // Start GSAP animation with ScrollTrigger
