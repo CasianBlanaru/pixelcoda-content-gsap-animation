@@ -29,9 +29,14 @@ page {
         gsap_scrolltrigger.defer = 1
         gsap_scrolltrigger.depends = gsap
 
+        # Animation definitions
+        animation_definitions = EXT:content_gsap_animation/Resources/Public/JavaScript/Core/animation-definitions.js
+        animation_definitions.defer = 1
+        # animation_definitions.depends = gsap # Not strictly necessary as it's a definition object
+
         # Animation initialization file
         animations = EXT:content_gsap_animation/Resources/Public/JavaScript/Bundle/animation.bundle.js
         animations.defer = 1
-        animations.depends = gsap_scrolltrigger
+        animations.depends = animation_definitions,gsap_scrolltrigger
     }
 }

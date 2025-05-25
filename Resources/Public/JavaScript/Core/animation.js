@@ -1,13 +1,20 @@
 // Wait for all scripts to fully load, especially GSAP
 document.addEventListener('DOMContentLoaded', () => {
-    // Wait a moment to ensure GSAP is fully loaded
+    // Wait a moment to ensure GSAP and AnimationDefinitions are fully loaded
     setTimeout(() => {
         // Get global GSAP references
         const gsap = window.gsap;
+        const AnimationDefinitions = window.AnimationDefinitions;
 
         // Check if GSAP is globally available
         if (!gsap) {
             console.error('GSAP is not loaded. Please include the GSAP library.');
+            return;
+        }
+
+        // Check if AnimationDefinitions is available
+        if (!AnimationDefinitions) {
+            console.error('AnimationDefinitions not loaded. Please ensure animation-definitions.js is loaded before this script.');
             return;
         }
 
@@ -30,137 +37,53 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!gsap) return;
 
             const animationType = element.getAttribute('data-gsap-anim');
-            const animationDuration = Number.parseFloat(element.getAttribute('data-gsap-duration') || 0.8);
+            const animationDuration = Number.parseFloat(element.getAttribute('data-gsap-duration') || 800); // Default duration from TYPO3 field
             const delay = Number.parseFloat(element.getAttribute('data-gsap-delay') || 0);
             const ease = element.getAttribute('data-gsap-easing') || 'power2.out';
             const once = element.getAttribute('data-gsap-once') === 'true';
 
-            // Create animation based on type
-            let animation;
+            // Fetch animation definition
+            let animDef = AnimationDefinitions[animationType];
 
-            switch(animationType) {
-                case 'fade-up':
-                    animation = {
-                        y: 50,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'fade-down':
-                    animation = {
-                        y: -50,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'fade-left':
-                    animation = {
-                        x: -50,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'fade-right':
-                    animation = {
-                        x: 50,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'fade':
-                    animation = {
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'zoom-in':
-                    animation = {
-                        scale: 0.5,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'zoom-out':
-                    animation = {
-                        scale: 1.5,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'flip-up':
-                    animation = {
-                        rotationX: 90,
-                        opacity: 0,
-                        transformOrigin: 'center bottom',
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'flip-down':
-                    animation = {
-                        rotationX: -90,
-                        opacity: 0,
-                        transformOrigin: 'center top',
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'slide-left':
-                    animation = {
-                        x: -100,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                case 'slide-right':
-                    animation = {
-                        x: 100,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
-                    break;
-                default:
-                    // Fall back to fade-up
-                    animation = {
-                        y: 30,
-                        opacity: 0,
-                        duration: animationDuration / 1000,
-                        ease: ease
-                    };
+            if (!animDef) {
+                console.warn(`Animation type "${animationType}" not found. Falling back to "default".`);
+                animDef = AnimationDefinitions['default'];
             }
+
+            if (!animDef) {
+                console.error(`Default animation definition not found. Cannot apply GSAP animation to element:`, element);
+                // Fallback to a very basic fade-in if default is also missing
+                animDef = { from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0 } };
+            }
+
+            // Prepare GSAP variables using animDef.from
+            let gsapVars = {
+                ...animDef.from, // Spread the 'from' variables from shared definitions
+                duration: animationDuration / 1000, // Convert ms to s
+                ease: ease
+            };
 
             // Add delay if present
             if (delay > 0) {
-                animation.delay = delay / 1000;
+                gsapVars.delay = delay / 1000; // Convert ms to s
             }
 
             // Use ScrollTrigger if available, otherwise fall back to simple animation
             if (ScrollTrigger) {
-                const scrollTrigger = {
+                const scrollTriggerOptions = {
                     trigger: element,
                     start: 'top 80%',
-                    // Modified toggleActions for better animations in both directions
-                    // First value: onEnter, Second: onLeave, Third: onEnterBack, Fourth: onLeaveBack
-                    toggleActions: once ? 'play none none none' : 'play none play none'
+                    toggleActions: once ? 'play none none none' : 'play none play none',
+                    // Consider adding 'end' and 'scrub' for more advanced scenarios if needed later
                 };
 
-                // Start GSAP animation with ScrollTrigger
                 gsap.from(element, {
-                    ...animation,
-                    scrollTrigger: scrollTrigger
+                    ...gsapVars,
+                    scrollTrigger: scrollTriggerOptions
                 });
             } else {
-                // Fall back without ScrollTrigger
-                gsap.from(element, animation);
+                // Fall back without ScrollTrigger (e.g. for elements visible in viewport on load)
+                gsap.from(element, gsapVars);
             }
         };
 
@@ -178,5 +101,5 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialization
         initGSAPAnimations();
 
-    }, 100);
+    }, 100); // setTimeout delay
 });
