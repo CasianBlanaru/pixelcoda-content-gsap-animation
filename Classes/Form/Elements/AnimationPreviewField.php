@@ -278,13 +278,14 @@ class AnimationPreviewField extends AbstractFormElement
         );
         $animationDefinitionsWebPath = PathUtility::getAbsoluteWebPath($animationDefinitionsPath);
 
-        $pageRenderer->addJsFooterFile(
-            $animationDefinitionsWebPath,
+        $pageRenderer->addJsFooterLibrary(
+            'content_gsap_animation_definitions', // Key
+            $animationDefinitionsWebPath,          // Path
             'text/javascript',
             false,  // $compress
             false,  // $forceOnTop
             '',     // $allWrap
-            false,  // $excludeFromConcatenation
+            true,   // $typo3PageModuleRelevant
             '|defer', // $additionalAttributes
             false,  // $enableAsyncInES6Modules
             'gsap_scrolltrigger' // $dependencies
@@ -296,16 +297,17 @@ class AnimationPreviewField extends AbstractFormElement
         );
         $previewWebPath = PathUtility::getAbsoluteWebPath($previewPath);
 
-        $pageRenderer->addJsFooterFile(
-            $previewWebPath,
+        $pageRenderer->addJsFooterLibrary(
+            'content_gsap_animation_preview_bundle', // Key
+            $previewWebPath,                         // Path
             'text/javascript',
             false, // $compress
             false, // $forceOnTop
             '',    // $allWrap
-            false, // $excludeFromConcatenation
+            true,  // $typo3PageModuleRelevant
             '|defer', // $additionalAttributes
             false, // $enableAsyncInES6Modules
-            PathUtility::getFileNameWithoutExtension($animationDefinitionsWebPath) // $dependencies
+            'content_gsap_animation_definitions' // $dependencies
         );
 
         return $result;
