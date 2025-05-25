@@ -218,10 +218,9 @@ class AnimationPreviewField extends AbstractFormElement
         $previewLabel = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-label');
         $html[] = '<div class="preview-label" data-show-preview="false">' . ($previewLabel ?? '') . '</div>';
         $html[] = '<div class="ce-preview">';
-        $html[] = '<span class="ce-preview__item"></span>';
-        $html[] = '<span class="ce-preview__item"></span>';
-        $html[] = '<span class="ce-preview__item"></span>';
-        $html[] = '<span class="ce-preview__item ce-preview__item--xs"></span>';
+        $html[] = '<div class="ce-preview__visual-placeholder"></div>';
+        $html[] = '<div class="ce-preview__text-line"></div>';
+        $html[] = '<div class="ce-preview__text-line ce-preview__text-line--short"></div>';
         $html[] = '</div>';
         $html[] = '</div>';
 
@@ -273,6 +272,24 @@ class AnimationPreviewField extends AbstractFormElement
             'gsap'
         );
 
+        // Load Animation Definitions
+        $animationDefinitionsPath = GeneralUtility::getFileAbsFileName(
+            'EXT:content_gsap_animation/Resources/Public/JavaScript/Core/animation-definitions.js'
+        );
+        $animationDefinitionsWebPath = PathUtility::getAbsoluteWebPath($animationDefinitionsPath);
+
+        $pageRenderer->addJsFooterFile(
+            $animationDefinitionsWebPath,
+            'text/javascript',
+            false,  // $compress
+            false,  // $forceOnTop
+            '',     // $allWrap
+            false,  // $excludeFromConcatenation
+            '|defer', // $additionalAttributes
+            false,  // $enableAsyncInES6Modules
+            'gsap_scrolltrigger' // $dependencies
+        );
+
         // Load Preview-Bundle
         $previewPath = GeneralUtility::getFileAbsFileName(
             'EXT:content_gsap_animation/Resources/Public/JavaScript/Bundle/preview.bundle.js'
@@ -282,13 +299,13 @@ class AnimationPreviewField extends AbstractFormElement
         $pageRenderer->addJsFooterFile(
             $previewWebPath,
             'text/javascript',
-            false,
-            false,
-            '',
-            false,
-            '|defer',
-            false,
-            'gsap_scrolltrigger'
+            false, // $compress
+            false, // $forceOnTop
+            '',    // $allWrap
+            false, // $excludeFromConcatenation
+            '|defer', // $additionalAttributes
+            false, // $enableAsyncInES6Modules
+            PathUtility::getFileNameWithoutExtension($animationDefinitionsWebPath) // $dependencies
         );
 
         return $result;
