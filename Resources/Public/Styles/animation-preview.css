@@ -1,12 +1,15 @@
 #preview-content-animation {
     position: relative;
-    display: block;
+    display: flex; /* Use flex to center content */
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
     overflow: hidden;
     box-sizing: border-box;
-    width: 290px;
-    height: 140px;
+    width: 290px; /* Keep original width */
+    height: 180px; /* Increased height to accommodate new structure and label */
     margin-top: 20px;
-    padding: 30px;
+    padding: 10px; /* Adjusted padding */
     border: 1px solid var(--typo3-form-section-border-color, #ccc);
     border-radius: 3px;
     background: var(--typo3-form-section-bg, #ededed);
@@ -17,13 +20,13 @@
     top: 0;
     right: 0;
     z-index: 10;
-    padding: 5px;
+    padding: 3px 6px;
     border-bottom: 1px solid var(--typo3-form-section-border-color, #ccc);
     border-left: 1px solid var(--typo3-form-section-border-color, #ccc);
     border-radius: 0 0 0 3px;
     background: #d1e2bd;
     color: #333;
-    font-size: 12px;
+    font-size: 11px; /* Slightly smaller font */
     opacity: 0;
     transition: opacity 0.2s ease-out;
 }
@@ -35,37 +38,58 @@
 #preview-content-animation .ce-preview {
     display: block;
     box-sizing: border-box;
-    width: 80px;
-    height: 80px;
-    margin-right: auto;
-    margin-left: auto;
+    width: 120px; /* Increased width for a more content-block like appearance */
+    height: auto; /* Auto height to fit content */
     padding: 10px;
-    border: 3px solid #333;
+    border: 2px solid var(--typo3-form-element-border-color, #aaa); /* Slightly lighter border */
+    background-color: var(--typo3-body-bg-color, #fff); /* White background for the CE itself */
+    border-radius: 2px;
 
-    -webkit-animation-duration: 2.6s;
-    animation-duration: 2.6s;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    /* Animation properties are applied by GSAP, keep will-change if needed */
+    will-change: opacity, transform;
 }
 
-#preview-content-animation .ce-preview .ce-preview__item {
-    content: " ";
-    display: block;
+/* New styles for the content element preview structure */
+.ce-preview__visual-placeholder {
     width: 100%;
-    height: 5px;
-    margin-bottom: 5px;
-    background: var(--typo3-form-section-color, #333);
+    height: 50px; /* Placeholder height */
+    background-color: var(--typo3-gray-200, #e9ecef); /* Light gray background */
+    border: 1px dashed var(--typo3-gray-400, #ced4da); /* Dashed border */
+    margin-bottom: 8px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--typo3-gray-500, #adb5bd);
+    font-size: 10px;
 }
 
-#preview-content-animation .ce-preview .ce-preview__item--xs {
-    width: 50%;
+/* Basic icon using CSS, could be replaced with an SVG or font icon */
+.ce-preview__visual-placeholder::before {
+    content: "🖼️"; /* Placeholder for an image icon, e.g., emoji */
+    font-size: 24px;
+    line-height: 1;
 }
 
-/* GSAP Preview */
+
+.ce-preview__text-line {
+    width: 100%;
+    height: 8px; /* Height of a text line */
+    background-color: var(--typo3-gray-300, #dee2e6); /* Color for text lines */
+    margin-bottom: 6px; /* Space between lines */
+    border-radius: 1px;
+}
+
+.ce-preview__text-line:last-child {
+    margin-bottom: 0; /* No margin for the last line */
+}
+
+.ce-preview__text-line--short {
+    width: 60%; /* Shorter text line */
+}
+
+
+/* GSAP Preview class added by JS - ensure it doesn't conflict */
 .gsap-preview {
-  will-change: opacity, transform;
-  transition: none;
+  /* will-change and transition are handled by the .ce-preview or directly by GSAP */
 }
