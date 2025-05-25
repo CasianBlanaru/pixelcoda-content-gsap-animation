@@ -1,6 +1,25 @@
-// GSAP Animation Preview
+console.log('preview.js: Script loaded.');
+
+// GSAP Availability Check (early)
+if (typeof gsap === 'undefined') {
+    console.error('preview.js: GSAP library is NOT available globally!');
+} else {
+    console.log('preview.js: GSAP library is available (version:', gsap.version, ').');
+}
+
+// AnimationDefinitions Availability Check (early)
+if (typeof window.AnimationDefinitions === 'undefined') {
+    console.error('preview.js: window.AnimationDefinitions is NOT available!');
+} else {
+    console.log('preview.js: window.AnimationDefinitions is available.');
+    console.log('preview.js: Found animation definitions keys:', Object.keys(window.AnimationDefinitions));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('preview.js: DOMContentLoaded event fired.');
+  console.log('preview.js: Setting timeout for initialization.');
   setTimeout(() => {
+    console.log('preview.js: Timeout callback reached. Ready to initialize.');
     const previewElement = document.querySelector('.ce-preview');
     const animationSelectField = document.querySelector('[name*="[tx_content_gsap_animation_animation]"]');
     const durationInputField = document.querySelector('[data-formengine-input-name*="[tx_content_gsap_animation_duration]"]');
@@ -8,88 +27,142 @@ document.addEventListener('DOMContentLoaded', () => {
     const easingField = document.querySelector('[name*="[tx_content_gsap_animation_easing]"]');
     const delayField = document.querySelector('[name*="[tx_content_gsap_animation_delay]"]');
 
-    const gsap = window.gsap;
-    const AnimationDefinitions = window.AnimationDefinitions;
+    const gsap = window.gsap; // Re-check in this scope if necessary, or rely on global
+    const AnimationDefinitions = window.AnimationDefinitions; // Re-check in this scope
 
     if (!gsap) {
-      console.error('GSAP not loaded. Please add GSAP library.');
+      console.error('preview.js: GSAP not loaded within setTimeout. Please add GSAP library.');
       return;
     }
     if (!AnimationDefinitions) {
-      console.error('AnimationDefinitions not loaded. Please ensure animation-definitions.js is loaded before this script.');
+      console.error('preview.js: AnimationDefinitions not loaded within setTimeout. Please ensure animation-definitions.js is loaded before this script.');
       return;
     }
 
     let defaultPreviewDuration = 800; // in ms
-    const pauseBetweenLoops = 1000; // in ms, this was defaultPreviewDelay
+    const pauseBetweenLoops = 1000; // in ms
     let animationInterval = null;
 
     function playGSAPPreview() {
-      if (!previewElement || typeof gsap === 'undefined' || !AnimationDefinitions) return;
-
-      const animType = animationSelectField?.value || 'default';
-      const animDef = AnimationDefinitions[animType] || AnimationDefinitions['default'];
-
-      if (!animDef) {
-        console.error(`Animation definition for "${animType}" not found.`);
+      console.log('preview.js: playGSAPPreview() called.');
+      if (!previewElement || typeof gsap === 'undefined' || !AnimationDefinitions) {
+        console.error('preview.js: playGSAPPreview() - critical prerequisites missing (previewElement, gsap, or AnimationDefinitions).');
         return;
       }
 
-      // Kill any existing tweens on the element to prevent conflicts
-      gsap.killTweensOf(previewElement);
+      const animType = animationSelectField?.value || 'default';
+      const currentDurationMs = defaultPreviewDuration;
+      const currentEase = easingField ? easingField.value : 'power2.out'; // Default from field or hardcoded
+      const currentDelayMs = delayField && delayField.value ? parseFloat(delayField.value) : 0;
 
-      const currentDurationSec = defaultPreviewDuration / 1000;
-      const currentDelaySec = delayField && delayField.value ? parseFloat(delayField.value) / 1000 : 0;
-      const currentEasing = easingField && easingField.value ? easingField.value : 'power2.out';
+      console.log('preview.js: animType =', animType, '; duration =', currentDurationMs, 'ms; ease =', currentEase, '; delay =', currentDelayMs + 'ms');
 
-      gsap.fromTo(previewElement,
-        { ...animDef.from },
-        {
-          ...animDef.to,
-          duration: currentDurationSec,
-          delay: currentDelaySec,
-          ease: currentEasing,
-          clearProps: "all", // Clears all inline styles set by GSAP upon completion or overwrite
-          onStart: () => {
-            // Ensure the element is visible at the start of the animation if opacity is involved
-            if (animDef.from.hasOwnProperty('opacity')) {
-               gsap.set(previewElement, {opacity: animDef.from.opacity});
-            } else if (animDef.to.hasOwnProperty('opacity') && animDef.to.opacity > 0) {
-               // If only 'to' has opacity and it's > 0, ensure it's initially visible if from doesn't specify
-               gsap.set(previewElement, {opacity: 0}); // Default to 0 if not specified in from
+      const animDef = AnimationDefinitions[animType] || AnimationDefinitions['default'];
+      console.log('preview.js: Retrieved animDef =', animDef);
+
+      if (!animDef) {
+        console.error('preview.js: Animation definition NOT FOUND for type:', animType);
+        return;
+      }
+
+      try {
+        console.log('preview.js: Killing existing tweens of previewElement.');
+        gsap.killTweensOf(previewElement);
+      } catch (e) {
+        console.error('preview.js: GSAP error during killTweensOf:', e);
+      }
+
+      const currentDurationSec = currentDurationMs / 1000;
+      const currentDelaySec = currentDelayMs / 1000;
+
+      console.log('preview.js: Animation params for GSAP: durationSec =', currentDurationSec, ', delaySec =', currentDelaySec, ', currentEase =', currentEase);
+
+      try {
+        console.log('preview.js: Applying gsap.fromTo() with fromVars:', animDef.from, 'and toVars:', animDef.to);
+        gsap.fromTo(previewElement,
+          { ...animDef.from },
+          {
+            ...animDef.to,
+            duration: currentDurationSec,
+            delay: currentDelaySec,
+            ease: currentEase,
+            clearProps: "all",
+            onStart: () => {
+              console.log('preview.js: GSAP onStart callback fired.');
+              try {
+                if (animDef.from.hasOwnProperty('opacity')) {
+                  gsap.set(previewElement, {opacity: animDef.from.opacity});
+                } else if (animDef.to.hasOwnProperty('opacity') && animDef.to.opacity > 0) {
+                  gsap.set(previewElement, {opacity: 0});
+                }
+              } catch (e_onStart) {
+                console.error('preview.js: GSAP error during onStart set:', e_onStart);
+              }
+            },
+            onComplete: () => {
+              console.log('preview.js: GSAP onComplete callback fired.');
+              setTimeout(() => {
+                console.log('preview.js: Fading out previewElement after pauseBetweenLoops.');
+                try {
+                  gsap.to(previewElement, { opacity: 0, duration: 0.3 });
+                } catch (e_onComplete) {
+                  console.error('preview.js: GSAP error during onComplete fadeOut:', e_onComplete);
+                }
+              }, pauseBetweenLoops);
             }
-          },
-          onComplete: () => {
-            setTimeout(() => {
-              // Simple fade out after the main animation completes and pause
-              gsap.to(previewElement, { opacity: 0, duration: 0.3 });
-            }, pauseBetweenLoops);
           }
-        }
-      );
+        );
+      } catch (e) {
+        console.error('preview.js: GSAP error during fromTo animation:', e);
+      }
     }
 
     function startPreviewLoop() {
+      console.log('preview.js: startPreviewLoop() called. Current interval cleared:', animationInterval);
       if (animationInterval) clearInterval(animationInterval);
-      playGSAPPreview(); // Play immediately
-      // Calculate total cycle time: animation duration + delay + pause + fadeout time
-      const totalCycleTime = (defaultPreviewDuration) +
-                             (delayField && delayField.value ? parseFloat(delayField.value) : 0) +
-                             pauseBetweenLoops + 300; // 300ms for the fade-out
+      playGSAPPreview();
+      console.log('preview.js: First preview played in startPreviewLoop.');
+      
+      const currentDelayValue = delayField && delayField.value ? parseFloat(delayField.value) : 0;
+      const totalCycleTime = defaultPreviewDuration + currentDelayValue + pauseBetweenLoops + 300; // 300ms for the fade-out
+
+      console.log('preview.js: Setting interval with totalCycleTime:', totalCycleTime, 'ms (duration:', defaultPreviewDuration, 'ms, input delay:', currentDelayValue, 'ms, pause:', pauseBetweenLoops, 'ms, fadeOut: 300ms)');
       animationInterval = setInterval(playGSAPPreview, totalCycleTime);
     }
 
     function handleParameterChange() {
-      // This function will be called by animation, duration, easing, or delay changes
-      console.log('Animation parameters changed, restarting preview loop.');
-      if (durationValueInputField) { // Update duration from the correct field
-          defaultPreviewDuration = Number.parseInt(durationValueInputField.value) || 800;
+      console.log('preview.js: handleParameterChange() called.');
+      if (durationValueInputField) {
+          const newDuration = Number.parseInt(durationValueInputField.value);
+          if (!isNaN(newDuration) && newDuration > 0) {
+            defaultPreviewDuration = newDuration;
+            console.log('preview.js: Updated defaultPreviewDuration to:', defaultPreviewDuration, 'ms');
+          } else {
+            console.warn('preview.js: Invalid duration value:', durationValueInputField.value, '. Keeping previous:', defaultPreviewDuration);
+          }
+      } else {
+        console.warn('preview.js: durationValueInputField not found, cannot update duration.');
       }
       startPreviewLoop();
     }
 
     function initialize() {
-      console.log('GSAP Preview initialize');
+      console.log('preview.js: initialize() called.');
+      console.log('preview.js: previewElement =', previewElement);
+      console.log('preview.js: animationSelectField =', animationSelectField);
+      console.log('preview.js: durationInputField (slider) =', durationInputField);
+      console.log('preview.js: durationValueInputField (number) =', durationValueInputField);
+      console.log('preview.js: easingField =', easingField);
+      console.log('preview.js: delayField =', delayField);
+
+      if (!previewElement) console.error('preview.js: Preview element NOT FOUND in DOM.');
+      if (!animationSelectField) console.warn('preview.js: Animation select field NOT FOUND in DOM.');
+      if (!durationInputField) console.warn('preview.js: Duration input field (slider) NOT FOUND in DOM.');
+      if (!durationValueInputField) console.warn('preview.js: Duration value input field (number) NOT FOUND in DOM.');
+      if (!easingField) console.warn('preview.js: Easing field NOT FOUND in DOM.');
+      if (!delayField) console.warn('preview.js: Delay field NOT FOUND in DOM.');
+
+
       if (previewElement) {
         previewElement.classList.add('gsap-preview');
       }
@@ -97,20 +170,27 @@ document.addEventListener('DOMContentLoaded', () => {
       if (animationSelectField) {
         animationSelectField.addEventListener('change', handleParameterChange);
       }
-      if (durationInputField) { // This is the slider
+      if (durationInputField) {
         durationInputField.addEventListener('change', (event) => {
-            // Update the visible number input when slider changes
+            console.log('preview.js: Duration slider changed to:', event.target.value);
             if(durationValueInputField) durationValueInputField.value = event.target.value;
-            handleParameterChange();
+            handleParameterChange(); // This will parse from durationValueInputField
         });
       }
-       if (durationValueInputField) { // This is the number input
-           defaultPreviewDuration = Number.parseInt(durationValueInputField.value) || 800;
-           // Also listen for direct changes to the number input if any
+       if (durationValueInputField) {
+           const initialDuration = Number.parseInt(durationValueInputField.value);
+            if (!isNaN(initialDuration) && initialDuration > 0) {
+                defaultPreviewDuration = initialDuration;
+            } else {
+                console.warn('preview.js: Invalid initial duration from field:', durationValueInputField.value, '. Using default:', defaultPreviewDuration);
+                durationValueInputField.value = defaultPreviewDuration; // Set to default if invalid
+            }
+           console.log('preview.js: Initial defaultPreviewDuration set to:', defaultPreviewDuration, 'ms from durationValueInputField.');
            durationValueInputField.addEventListener('change', (event) => {
-               defaultPreviewDuration = Number.parseInt(event.target.value) || 800;
+               console.log('preview.js: Duration number input changed to:', event.target.value);
+               // handleParameterChange will be called, which reads this field's value.
                // Optional: update slider if it exists and is separate
-               if(durationInputField && durationInputField !== event.target) durationInputField.value = event.target.value;
+               if(durationInputField && durationInputField.value !== event.target.value) durationInputField.value = event.target.value;
                handleParameterChange();
            });
        }
@@ -123,12 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
         delayField.addEventListener('change', handleParameterChange);
       }
 
-      // Initial call to setup and start the animation loop
       if (previewElement) {
+        console.log('preview.js: Initializing preview loop.');
         startPreviewLoop();
+      } else {
+        console.error('preview.js: Cannot start preview loop, previewElement is missing.');
       }
     }
 
     initialize();
-  }, 100); // Short delay for initialization
+  }, 100); 
 });
