@@ -104,8 +104,8 @@
 			</trans-unit>
 
 			<trans-unit id="preview-help" xml:space="preserve">
-				<source>Respects reduced motion.</source>
-				<target>Respektiert reduzierte Bewegung.</target>
+				<source>Motion-safe. Headless-ready.</source>
+				<target>Motion-safe. Headless-ready.</target>
 			</trans-unit>
 		</body>
 	</file>

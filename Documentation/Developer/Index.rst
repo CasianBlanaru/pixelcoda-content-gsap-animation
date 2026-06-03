@@ -44,6 +44,8 @@ Headless Rendering
 
 The data processor exposes both raw HTML attributes and structured data. Classic Fluid layouts can use the raw string, while headless renderers can use the structured array.
 
+The backend preview also surfaces headless readiness visually, but does not force a frontend implementation. The structured output stays framework-agnostic.
+
 Available processed variables:
 
 * ``animationSettings``: raw HTML attribute string for Fluid layouts.

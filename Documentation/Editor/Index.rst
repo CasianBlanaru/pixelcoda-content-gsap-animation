@@ -30,11 +30,11 @@ Animations are automatically disabled for visitors who enabled reduced motion in
 Screenshot
 ==========
 
-.. figure:: ../Images/Example.gif
+.. figure:: ../Images/Settings/premium-preview.png
    :width: 900px
-   :alt: Preview of the animation in the TYPO3 backend
+   :alt: Premium preview of the animation in the TYPO3 backend
 
-   The TYPO3 backend preview of animations right after installation
+   Premium TYPO3 backend preview with GSAP, reduced-motion and headless-state indicators
 
 Available Animation Types
 ==========================

@@ -25,11 +25,11 @@ The extension supports classic TYPO3 rendering with Fluid Styled Content or Boot
 Screenshot
 ==========
 
-.. figure:: ../Images/Example.gif
+.. figure:: ../Images/Settings/premium-preview.png
    :width: 900px
-   :alt: Preview of the animation in the TYPO3 backend
+   :alt: Premium preview of the animation in the TYPO3 backend
 
-   The TYPO3 backend preview of animations right after installation
+   Premium backend preview for animation settings
 
 .. _features:
 
@@ -44,5 +44,6 @@ Features
 * Responsive and accessible animations
 * Respects the visitor's ``prefers-reduced-motion`` setting
 * Full TYPO3 backend integration with live preview
+* Premium backend preview with compact motion-state indicators
 * Compatible with Bootstrap Package and Fluid Styled Content
 * Headless-ready structured animation settings

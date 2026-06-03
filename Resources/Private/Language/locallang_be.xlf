@@ -88,7 +88,7 @@
 			</trans-unit>
 
 			<trans-unit id="preview-help" xml:space="preserve">
-				<source>Respects reduced motion.</source>
+				<source>Motion-safe. Headless-ready.</source>
 			</trans-unit>
 		</body>
 	</file>
