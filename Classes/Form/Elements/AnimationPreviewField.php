@@ -182,10 +182,22 @@ class AnimationPreviewField extends AbstractFormElement
 
         $fieldWizardResult = $this->renderFieldWizard();
         $fieldWizardHtml = $fieldWizardResult['html'];
+        $fieldLabel = (string)($parameterArray['fieldConf']['label'] ?? '');
+        $languageService = $GLOBALS['LANG'] ?? null;
+        $translatedFieldLabel = $fieldLabel;
+        if (is_object($languageService) && method_exists($languageService, 'sL')) {
+            $resolvedFieldLabel = $languageService->sL($fieldLabel);
+            $translatedFieldLabel = $resolvedFieldLabel !== '' ? $resolvedFieldLabel : $fieldLabel;
+        }
 
         $html = [];
         $html[] = '<div class="formengine-field-item t3js-formengine-field-item">';
         $html[] = $fieldInformationHtml;
+        if ($translatedFieldLabel !== '') {
+            $html[] = '<label class="form-label t3js-formengine-label pc-animation-select-label" for="' . htmlspecialchars($selectId, ENT_COMPAT, 'UTF-8', false) . '">';
+            $html[] = htmlspecialchars($translatedFieldLabel, ENT_COMPAT, 'UTF-8', false);
+            $html[] = '</label>';
+        }
         $html[] = '<div class="form-control-wrap">';
         $html[] = '<div class="form-wizards-wrap">';
         $html[] = '<div class="form-wizards-element">';

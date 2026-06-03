@@ -12,6 +12,19 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.5.8 - 2026-06-03
+==================
+
+Changed
+-------
+
+* Kept the backend animation preview in a two-column layout for TYPO3 editor workspaces.
+
+Fixed
+-----
+
+* Restored the visible animation select label in the custom backend form element.
+
 3.5.7 - 2026-06-03
 ==================
 
