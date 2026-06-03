@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.5.10 - 2026-06-03
+### Changed
+- [IMPROVEMENT] Moved the backend preview into a right-hand column while keeping the regular TYPO3 animation fields on the left.
+
 ## 3.5.9 - 2026-06-03
 ### Changed
 - [IMPROVEMENT] Kept the normal TYPO3 backend fields and refined the preview itself into a two-column layout.
