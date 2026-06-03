@@ -27,14 +27,14 @@ Accessibility
 Animations are automatically disabled for visitors who enabled reduced motion in their operating system or browser. This keeps the content visible and avoids motion that can be distracting or uncomfortable.
 
 
-Screenshot
-==========
+Backend Preview
+===============
 
-.. figure:: ../Images/Settings/premium-preview.png
+.. figure:: ../Images/Settings/backend-settings-animation-flow.gif
    :width: 900px
-   :alt: Premium preview of the animation in the TYPO3 backend
+   :alt: Original TYPO3 backend animation settings flow
 
-   Premium TYPO3 backend preview with GSAP, reduced-motion and automatic headless-output indicators
+   Original TYPO3 backend flow showing animation settings, preset changes, preview and timing controls
 
 .. figure:: ../Images/Settings/backend-animation-preview.gif
    :width: 900px
@@ -42,11 +42,11 @@ Screenshot
 
    Animated backend preview showing the GSAP animation preview behavior
 
-.. figure:: ../Images/Settings/backend-settings-animation-flow.gif
+.. figure:: ../Images/Settings/premium-preview.png
    :width: 900px
-   :alt: Original TYPO3 backend animation settings flow
+   :alt: Static premium preview of the animation in the TYPO3 backend
 
-   Original TYPO3 backend flow showing animation settings, preset changes and timing controls
+   Static fallback preview for documentation and release pages
 
 The backend preview also shows GIF examples for common presets such as fade, slide, zoom and flip. Editors can compare the animation possibilities directly in the content element form.
 

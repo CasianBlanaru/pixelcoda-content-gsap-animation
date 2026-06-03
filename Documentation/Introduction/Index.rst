@@ -25,11 +25,11 @@ The extension supports classic TYPO3 rendering with Fluid Styled Content or Boot
 Screenshot
 ==========
 
-.. figure:: ../Images/Settings/premium-preview.png
+.. figure:: ../Images/Settings/backend-settings-animation-flow.gif
    :width: 900px
-   :alt: Premium preview of the animation in the TYPO3 backend
+   :alt: TYPO3 backend animation settings flow
 
-   Premium backend preview for animation settings
+   TYPO3 backend animation settings flow with live preview and timing controls
 
 .. _features:
 

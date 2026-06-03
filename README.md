@@ -4,7 +4,7 @@
 
 GSAP-powered scroll animations for TYPO3 content elements. Editors choose an animation in the content element form; the extension renders the required `data-gsap-*` attributes and initializes GSAP ScrollTrigger in the frontend.
 
-![Premium animation preview](Documentation/Images/Settings/premium-preview.png)
+![TYPO3 backend animation settings flow](Documentation/Images/Settings/backend-settings-animation-flow.gif)
 
 ## Highlights
 
@@ -48,11 +48,11 @@ Open a content element and use the **Animation** tab. Select an animation preset
 
 The backend preview shows the selected animation on a content-card mockup and displays GIF examples for common presets such as fade, slide, zoom and flip. This helps editors compare the animation possibilities without leaving the form.
 
-Existing documentation screenshots:
+Documentation media:
 
-- [Premium preview](Documentation/Images/Settings/premium-preview.png)
 - [Original TYPO3 backend settings flow GIF](Documentation/Images/Settings/backend-settings-animation-flow.gif)
 - [Animated backend preview GIF](Documentation/Images/Settings/backend-animation-preview.gif)
+- [Static premium preview](Documentation/Images/Settings/premium-preview.png)
 - [Animation tab](Documentation/Images/Settings/animation-tab.png)
 - [Extended settings](Documentation/Images/Settings/extended-settings.png)
 - [Footer label](Documentation/Images/Settings/footer-label.png)
