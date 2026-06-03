@@ -13,7 +13,7 @@ GSAP-powered scroll animations for TYPO3 content elements. Editors choose an ani
 - Bootstrap Package v13, v14 and v15 support
 - Fade, slide, zoom and flip animation presets
 - Backend preview with duration, delay and easing support
-- Full-width premium backend preview with GreenSock branding, reduced-motion and headless-state indicators
+- Full-width premium backend preview with readable dark-mode styling, GreenSock branding and automatic headless-output indicator
 - Extended settings for offset, anchor placement, once and mirror behavior
 - BITV-friendly behavior via `prefers-reduced-motion`
 - Headless-ready structured animation data for custom renderers and APIs
@@ -59,7 +59,9 @@ The frontend script respects `prefers-reduced-motion: reduce`. If the visitor ha
 
 ## Headless Usage
 
-The data processor now exposes both rendered HTML attributes and structured animation data:
+Headless is not an editor setting and there is no toggle to enable it in the content element form. The extension always exposes structured animation data when the data processor is used by the selected TypoScript setup.
+
+The data processor exposes both rendered HTML attributes and structured animation data:
 
 - `animationSettings`: raw HTML attribute string for Fluid layouts
 - `gsapAnimationSettings`: legacy raw HTML attribute string
@@ -88,6 +90,8 @@ Custom Fluid layouts can keep using:
 ```
 
 Headless renderers should consume `animationSettingsData` and decide in the frontend application whether to use GSAP, native CSS, framework-native animation or no animation. Keep the reduced-motion decision in the frontend so API responses stay presentation-neutral.
+
+In short: editors only choose the animation. Integrators consume `animationSettingsData` in custom Fluid layouts, JSON responses, API resources or headless frontend adapters.
 
 ## Development
 

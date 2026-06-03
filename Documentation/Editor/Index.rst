@@ -34,7 +34,7 @@ Screenshot
    :width: 900px
    :alt: Premium preview of the animation in the TYPO3 backend
 
-   Premium TYPO3 backend preview with GSAP, reduced-motion and headless-state indicators
+   Premium TYPO3 backend preview with GSAP, reduced-motion and automatic headless-output indicators
 
 Available Animation Types
 ==========================

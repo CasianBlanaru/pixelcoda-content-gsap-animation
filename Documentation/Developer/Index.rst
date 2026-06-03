@@ -42,6 +42,8 @@ Here's an example of how the rendered HTML should look:
 Headless Rendering
 ==================
 
+Headless is not an editor-side setting. Editors choose the animation in the content element form; integrators decide how structured animation data is exposed in APIs, JSON responses or custom frontend adapters.
+
 The data processor exposes both raw HTML attributes and structured data. Classic Fluid layouts can use the raw string, while headless renderers can use the structured array.
 
 The backend preview also surfaces headless readiness visually, but does not force a frontend implementation. The structured output stays framework-agnostic.
@@ -69,6 +71,8 @@ Example structured data:
    }
 
 Headless frontends should use this data to decide how animations are implemented. They can use GSAP, CSS transitions, native framework animations or no animation at all. Keep the reduced-motion decision in the frontend so API responses stay presentation-neutral.
+
+In short: there is no additional backend toggle for headless mode. Use ``animationSettingsData`` from the processed content element data.
 
 
 Extension

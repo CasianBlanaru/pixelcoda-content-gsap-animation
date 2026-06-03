@@ -12,6 +12,21 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.5.0 - 2026-06-03
+==================
+
+Changed
+-------
+
+* Improved backend preview readability in TYPO3 dark mode.
+* Clarified in the backend preview that headless output is automatic via ``animationSettingsData``.
+* Updated README and documentation to explain that there is no editor-side headless toggle.
+
+Fixed
+-----
+
+* Prevented low-contrast preview title text and cramped dark-mode spacing.
+
 3.4.0 - 2026-06-03
 ==================
 

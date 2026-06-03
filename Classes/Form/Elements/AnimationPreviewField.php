@@ -229,8 +229,9 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<div class="preview-shell">';
         $html[] = '<div class="preview-copy" aria-hidden="true">';
         $html[] = '<span class="preview-kicker">ScrollTrigger</span>';
-        $html[] = '<span class="preview-title">Motion preview</span>';
-        $html[] = '<span class="preview-description">GSAP powered, reduced-motion safe and ready for headless frontends.</span>';
+        $html[] = '<span class="preview-title">Animation preview</span>';
+        $html[] = '<span class="preview-description">GSAP animation with reduced-motion support.</span>';
+        $html[] = '<span class="preview-headless-note">Headless output is automatic: use animationSettingsData.</span>';
         $html[] = '</div>';
         $html[] = '<div class="preview-stage">';
         $html[] = '<div class="preview-stage__rail" aria-hidden="true"></div>';
@@ -248,7 +249,7 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<div class="preview-meta" aria-hidden="true">';
         $html[] = '<span>GSAP</span>';
         $html[] = '<span>Reduced motion</span>';
-        $html[] = '<span>Headless data</span>';
+        $html[] = '<span>Headless automatic</span>';
         $html[] = '</div>';
         $html[] = '</div>';
         $html[] = '</div>';
