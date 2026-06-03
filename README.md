@@ -13,7 +13,7 @@ GSAP-powered scroll animations for TYPO3 content elements. Editors choose an ani
 - Bootstrap Package v13, v14 and v15 support
 - Fade, slide, zoom and flip animation presets
 - Backend preview with duration, delay and easing support
-- Premium backend preview with GSAP, reduced-motion and headless-state indicators
+- Full-width premium backend preview with GreenSock branding, reduced-motion and headless-state indicators
 - Extended settings for offset, anchor placement, once and mirror behavior
 - BITV-friendly behavior via `prefers-reduced-motion`
 - Headless-ready structured animation data for custom renderers and APIs
@@ -87,7 +87,7 @@ Custom Fluid layouts can keep using:
 {f:if(condition: animationSettings, then: '{animationSettings -> f:format.raw()}')}
 ```
 
-Headless renderers should consume `animationSettingsData` and decide in the frontend application whether to use GSAP, native CSS, or no animation.
+Headless renderers should consume `animationSettingsData` and decide in the frontend application whether to use GSAP, native CSS, framework-native animation or no animation. Keep the reduced-motion decision in the frontend so API responses stay presentation-neutral.
 
 ## Development
 
@@ -116,6 +116,8 @@ Functional tests require TYPO3 Testing Framework database credentials. With DDEV
 
 ## Documentation
 
-Full documentation is available at:
+Full documentation is shipped with the extension:
 
-https://docs.typo3.org/p/pixelcoda/content-gsap-animation/main/en-us/
+https://github.com/CasianBlanaru/pixelcoda-content-gsap-animation/tree/main/Documentation
+
+The TYPO3 documentation URL can be enabled once docs.typo3.org has indexed the package.

@@ -12,6 +12,27 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.4.0 - 2026-06-03
+==================
+
+Added
+-----
+
+* Added GreenSock logo branding to the TYPO3 backend animation preview.
+* Added refreshed wide premium preview assets for README, documentation and releases.
+
+Changed
+-------
+
+* Expanded the premium preview to use the full available backend form width.
+* Improved preview copy for GSAP, reduced-motion and headless-ready usage.
+* Updated README and documentation links while docs.typo3.org is not yet rendering the package page.
+
+Fixed
+-----
+
+* Constrained GreenSock logo rendering and responsive text wrapping in the TYPO3 backend preview.
+
 3.3.0 - 2026-06-03
 ==================
 

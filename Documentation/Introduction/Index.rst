@@ -44,6 +44,6 @@ Features
 * Responsive and accessible animations
 * Respects the visitor's ``prefers-reduced-motion`` setting
 * Full TYPO3 backend integration with live preview
-* Premium backend preview with compact motion-state indicators
+* Full-width premium backend preview with GreenSock branding and compact motion-state indicators
 * Compatible with Bootstrap Package and Fluid Styled Content
 * Headless-ready structured animation settings

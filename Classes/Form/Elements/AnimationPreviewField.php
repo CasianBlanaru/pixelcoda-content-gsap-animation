@@ -6,16 +6,12 @@ namespace Pixelcoda\ContentGsapAnimation\Form\Elements;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Form\Utility\FormEngineUtility;
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
-use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Core\Security\ContentSecurityPolicy\ConsumableNonce;
 
 /**
  * This file is part of the "content_gsap_animation" Extension for TYPO3 CMS.
@@ -217,10 +213,24 @@ class AnimationPreviewField extends AbstractFormElement
 
         $previewLabel = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-label');
         $previewHelp = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-help');
+        $gsapLogoPath = GeneralUtility::getFileAbsFileName(
+            'EXT:content_gsap_animation/Resources/Public/Images/gsap-greensock.svg'
+        );
+        $gsapLogoWebPath = PathUtility::getAbsoluteWebPath($gsapLogoPath);
+
         $html[] = '<div id="preview-content-animation" role="group" aria-label="' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '">';
         $html[] = '<div class="preview-topline">';
         $html[] = '<span class="preview-label" data-show-preview="false">' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '</span>';
-        $html[] = '<span class="preview-help">' . htmlspecialchars((string)($previewHelp ?? ''), ENT_COMPAT, 'UTF-8', false) . '</span>';
+        $html[] = '<span class="preview-brand">';
+        $html[] = '<span class="preview-brand-logo" style="background-image: url(' . htmlspecialchars($gsapLogoWebPath, ENT_COMPAT, 'UTF-8', false) . ');" aria-hidden="true"></span>';
+        $html[] = '<span>' . htmlspecialchars((string)($previewHelp ?? ''), ENT_COMPAT, 'UTF-8', false) . '</span>';
+        $html[] = '</span>';
+        $html[] = '</div>';
+        $html[] = '<div class="preview-shell">';
+        $html[] = '<div class="preview-copy" aria-hidden="true">';
+        $html[] = '<span class="preview-kicker">ScrollTrigger</span>';
+        $html[] = '<span class="preview-title">Motion preview</span>';
+        $html[] = '<span class="preview-description">GSAP powered, reduced-motion safe and ready for headless frontends.</span>';
         $html[] = '</div>';
         $html[] = '<div class="preview-stage">';
         $html[] = '<div class="preview-stage__rail" aria-hidden="true"></div>';
@@ -239,6 +249,7 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<span>GSAP</span>';
         $html[] = '<span>Reduced motion</span>';
         $html[] = '<span>Headless data</span>';
+        $html[] = '</div>';
         $html[] = '</div>';
         $html[] = '</div>';
         $html[] = '</div>';

@@ -1,5 +1,6 @@
 #preview-content-animation {
     --pc-preview-accent: #0f766e;
+    --pc-preview-accent-strong: #84cc16;
     --pc-preview-accent-soft: #ccfbf1;
     --pc-preview-ink: var(--typo3-text-color, #111827);
     --pc-preview-muted: var(--typo3-text-color-secondary, #64748b);
@@ -8,123 +9,200 @@
     --pc-preview-surface-raised: var(--typo3-form-section-bg, #f8fafc);
 
     box-sizing: border-box;
-    width: min(100%, 420px);
+    width: 100%;
+    max-width: 100%;
     margin-top: 16px;
-    padding: 14px;
+    padding: 16px;
+    overflow: hidden;
     border: 1px solid var(--pc-preview-border);
     border-radius: 8px;
     background:
-        linear-gradient(135deg, rgb(15 118 110 / 10%), transparent 42%),
+        radial-gradient(circle at 8% 10%, rgb(132 204 22 / 18%), transparent 30%),
+        linear-gradient(135deg, rgb(15 118 110 / 12%), transparent 46%),
         linear-gradient(180deg, var(--pc-preview-surface-raised), var(--pc-preview-surface));
     color: var(--pc-preview-ink);
-    box-shadow: 0 14px 34px rgb(15 23 42 / 14%);
+    box-shadow: 0 16px 44px rgb(15 23 42 / 16%);
 }
 
 #preview-content-animation .preview-topline {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: 16px;
+    margin-bottom: 16px;
 }
 
 #preview-content-animation .preview-label,
-#preview-content-animation .preview-help {
+#preview-content-animation .preview-brand {
     display: inline-flex;
     align-items: center;
-    min-height: 28px;
+    min-height: 30px;
     line-height: 1.25;
 }
 
 #preview-content-animation .preview-label {
-    padding: 4px 10px;
+    padding: 4px 12px;
     border: 1px solid var(--pc-preview-accent);
     border-radius: 999px;
     background: var(--pc-preview-accent-soft);
     color: #134e4a;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
 }
 
-#preview-content-animation .preview-help {
-    max-width: 190px;
+#preview-content-animation .preview-brand {
+    gap: 8px;
+    max-width: 58%;
     color: var(--pc-preview-muted);
     font-size: 12px;
+    font-weight: 700;
     text-align: right;
+}
+
+#preview-content-animation .preview-brand-logo {
+    display: inline-block;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 34px;
+    overflow: hidden;
+    border-radius: 6px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#preview-content-animation .preview-brand > span:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+#preview-content-animation .preview-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    gap: 16px;
+    align-items: stretch;
+    min-width: 0;
+}
+
+#preview-content-animation .preview-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 230px;
+    padding: 18px;
+    min-width: 0;
+    border: 1px solid rgb(148 163 184 / 38%);
+    border-radius: 7px;
+    background: rgb(255 255 255 / 42%);
+}
+
+#preview-content-animation .preview-kicker {
+    width: fit-content;
+    margin-bottom: 10px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgb(132 204 22 / 18%);
+    color: var(--pc-preview-accent);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+#preview-content-animation .preview-title {
+    margin-bottom: 8px;
+    color: var(--pc-preview-ink);
+    font-size: 18px;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+#preview-content-animation .preview-description {
+    max-width: 24ch;
+    color: var(--pc-preview-muted);
+    font-size: 13px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
 }
 
 #preview-content-animation .preview-stage {
     position: relative;
     display: grid;
     place-items: center;
-    min-height: 174px;
+    min-width: 0;
+    min-height: 230px;
     overflow: hidden;
     border: 1px solid rgb(148 163 184 / 45%);
     border-radius: 7px;
     background:
-        radial-gradient(circle at 20% 20%, rgb(15 118 110 / 18%), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgb(132 204 22 / 18%), transparent 28%),
+        radial-gradient(circle at 22% 72%, rgb(15 118 110 / 20%), transparent 32%),
         linear-gradient(135deg, rgb(15 23 42 / 6%) 0 1px, transparent 1px 18px),
         var(--pc-preview-surface);
 }
 
 #preview-content-animation .preview-stage__rail {
     position: absolute;
-    inset: 18px 22px auto;
+    top: 34px;
+    right: 9%;
+    left: 9%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgb(15 118 110 / 55%), transparent);
+    background: linear-gradient(90deg, transparent, rgb(15 118 110 / 62%), transparent);
 }
 
 #preview-content-animation .preview-stage__rail::before,
 #preview-content-animation .preview-stage__rail::after {
     position: absolute;
-    top: -3px;
-    width: 7px;
-    height: 7px;
+    top: -4px;
+    width: 9px;
+    height: 9px;
     border-radius: 999px;
     background: var(--pc-preview-accent);
     content: "";
 }
 
 #preview-content-animation .preview-stage__rail::before {
-    left: 12%;
+    left: 14%;
 }
 
 #preview-content-animation .preview-stage__rail::after {
-    right: 12%;
+    right: 14%;
 }
 
 #preview-content-animation .ce-preview {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 12px;
+    grid-template-columns: minmax(82px, 108px) minmax(120px, 1fr);
+    gap: 16px;
     box-sizing: border-box;
-    width: min(86%, 284px);
-    min-height: 104px;
-    padding: 12px;
+    width: min(82%, 540px);
+    max-width: calc(100% - 32px);
+    min-height: 130px;
+    padding: 16px;
     border: 1px solid rgb(148 163 184 / 55%);
     border-radius: 7px;
     background: color-mix(in srgb, var(--pc-preview-surface) 92%, white);
-    box-shadow: 0 16px 42px rgb(15 23 42 / 18%);
+    box-shadow: 0 18px 48px rgb(15 23 42 / 18%);
     will-change: opacity, transform;
 }
 
 #preview-content-animation .ce-preview__media {
     position: relative;
-    min-height: 80px;
+    min-height: 98px;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 6px;
     background:
-        linear-gradient(135deg, rgb(15 118 110 / 92%), rgb(14 165 233 / 78%)),
+        linear-gradient(135deg, rgb(132 204 22 / 88%), rgb(15 118 110 / 92%) 48%, rgb(14 165 233 / 78%)),
         var(--pc-preview-accent);
 }
 
 #preview-content-animation .ce-preview__media::before {
     position: absolute;
-    inset: auto 10px 10px;
-    height: 34px;
-    border-radius: 999px 999px 6px 6px;
+    right: 14px;
+    bottom: 12px;
+    left: 14px;
+    height: 42px;
+    border-radius: 999px 999px 7px 7px;
     background: rgb(255 255 255 / 42%);
     content: "";
 }
@@ -132,22 +210,22 @@
 #preview-content-animation .ce-preview__spark {
     position: absolute;
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 999px;
     background: rgb(255 255 255 / 76%);
 }
 
 #preview-content-animation .ce-preview__spark--one {
-    top: 12px;
-    left: 12px;
+    top: 16px;
+    left: 16px;
 }
 
 #preview-content-animation .ce-preview__spark--two {
-    right: 12px;
-    bottom: 18px;
-    width: 10px;
-    height: 10px;
+    right: 14px;
+    bottom: 24px;
+    width: 11px;
+    height: 11px;
 }
 
 #preview-content-animation .ce-preview__content {
@@ -164,16 +242,16 @@
 }
 
 #preview-content-animation .ce-preview__eyebrow {
-    width: 42px;
-    height: 7px;
-    margin-bottom: 12px;
+    width: 52px;
+    height: 8px;
+    margin-bottom: 14px;
     background: var(--pc-preview-accent);
 }
 
 #preview-content-animation .ce-preview__text-line {
     width: 100%;
-    height: 9px;
-    margin-bottom: 8px;
+    height: 10px;
+    margin-bottom: 10px;
 }
 
 #preview-content-animation .ce-preview__text-line:last-child {
@@ -186,22 +264,22 @@
 
 #preview-content-animation .preview-meta {
     position: absolute;
-    right: 12px;
-    bottom: 10px;
-    left: 12px;
+    right: 14px;
+    bottom: 12px;
+    left: 14px;
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
 }
 
 #preview-content-animation .preview-meta span {
-    padding: 3px 7px;
-    border: 1px solid rgb(148 163 184 / 40%);
+    padding: 4px 8px;
+    border: 1px solid rgb(148 163 184 / 42%);
     border-radius: 999px;
-    background: rgb(255 255 255 / 62%);
+    background: rgb(255 255 255 / 64%);
     color: var(--pc-preview-muted);
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 700;
 }
 
 #preview-content-animation .gsap-preview {
@@ -214,11 +292,15 @@
         --pc-preview-accent-soft: rgb(20 184 166 / 18%);
         --pc-preview-surface: var(--typo3-body-bg-color, #111827);
         --pc-preview-surface-raised: var(--typo3-form-section-bg, #1f2937);
-        box-shadow: 0 18px 38px rgb(0 0 0 / 34%);
+        box-shadow: 0 18px 42px rgb(0 0 0 / 36%);
     }
 
     #preview-content-animation .preview-label {
         color: #99f6e4;
+    }
+
+    #preview-content-animation .preview-copy {
+        background: rgb(15 23 42 / 34%);
     }
 
     #preview-content-animation .ce-preview {
@@ -227,6 +309,44 @@
 
     #preview-content-animation .preview-meta span {
         background: rgb(15 23 42 / 70%);
+    }
+}
+
+@media (max-width: 980px) {
+    #preview-content-animation .preview-topline,
+    #preview-content-animation .preview-shell {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #preview-content-animation .preview-brand {
+        align-self: flex-start;
+        max-width: 100%;
+        text-align: left;
+    }
+
+    #preview-content-animation .preview-copy {
+        min-height: auto;
+        padding: 14px;
+    }
+
+    #preview-content-animation .preview-description {
+        max-width: none;
+    }
+
+    #preview-content-animation .ce-preview {
+        width: min(92%, 520px);
+        grid-template-columns: 82px minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 540px) {
+    #preview-content-animation .ce-preview {
+        grid-template-columns: 1fr;
+    }
+
+    #preview-content-animation .preview-stage {
+        min-height: 280px;
     }
 }
 

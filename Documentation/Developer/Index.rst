@@ -68,7 +68,7 @@ Example structured data:
      "mirror": false
    }
 
-Headless frontends should use this data to decide how animations are implemented. They can use GSAP, CSS transitions, native framework animations or no animation at all.
+Headless frontends should use this data to decide how animations are implemented. They can use GSAP, CSS transitions, native framework animations or no animation at all. Keep the reduced-motion decision in the frontend so API responses stay presentation-neutral.
 
 
 Extension
