@@ -54,31 +54,16 @@
 }
 
 #preview-content-animation .preview-brand {
-    gap: 8px;
     flex: 0 0 auto;
-    max-width: 140px;
-    color: var(--pc-preview-muted);
-    font-size: 12px;
-    font-weight: 800;
-    text-align: right;
-    white-space: nowrap;
-}
-
-#preview-content-animation .preview-brand-logo {
-    display: inline-block;
-    flex: 0 0 30px;
-    width: 30px;
-    height: 34px;
-    overflow: hidden;
-    border-radius: 6px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-#preview-content-animation .preview-brand > span:last-child {
-    min-width: 0;
-    overflow-wrap: anywhere;
+    min-height: 32px;
+    padding: 5px 12px;
+    border: 1px solid rgb(15 118 110 / 45%);
+    border-radius: 999px;
+    background: rgb(132 204 22 / 20%);
+    color: var(--pc-preview-accent);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: .04em;
 }
 
 #preview-content-animation .preview-shell {
@@ -141,10 +126,14 @@
 
 #preview-content-animation .preview-stage {
     position: relative;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
     min-width: 0;
-    min-height: 230px;
+    min-height: 320px;
+    padding: 48px 14px 14px;
     overflow: hidden;
     border: 1px solid rgb(148 163 184 / 45%);
     border-radius: 7px;
@@ -190,7 +179,7 @@
     grid-template-columns: minmax(82px, 108px) minmax(120px, 1fr);
     gap: 16px;
     box-sizing: border-box;
-    width: min(82%, 540px);
+    width: min(82%, 500px);
     max-width: calc(100% - 32px);
     min-height: 130px;
     padding: 16px;
@@ -199,6 +188,43 @@
     background: color-mix(in srgb, var(--pc-preview-surface) 92%, white);
     box-shadow: 0 18px 48px rgb(15 23 42 / 18%);
     will-change: opacity, transform;
+}
+
+#preview-content-animation .preview-gallery {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(74px, 1fr));
+    gap: 8px;
+    width: min(92%, 620px);
+}
+
+#preview-content-animation .preview-gallery__item {
+    min-width: 0;
+    margin: 0;
+    padding: 7px;
+    border: 1px solid rgb(148 163 184 / 42%);
+    border-radius: 7px;
+    background: rgb(255 255 255 / 68%);
+}
+
+#preview-content-animation .preview-gallery__item img {
+    display: block;
+    width: 100%;
+    height: 42px;
+    object-fit: contain;
+}
+
+#preview-content-animation .preview-gallery__item figcaption {
+    margin-top: 5px;
+    overflow: hidden;
+    color: var(--pc-preview-muted);
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #preview-content-animation .ce-preview__media {
@@ -278,13 +304,13 @@
 }
 
 #preview-content-animation .preview-meta {
-    position: absolute;
-    right: 14px;
-    bottom: 12px;
-    left: 14px;
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 6px;
+    width: min(92%, 620px);
 }
 
 #preview-content-animation .preview-meta span {
@@ -317,6 +343,11 @@
         color: #99f6e4;
     }
 
+    #preview-content-animation .preview-brand {
+        background: rgb(132 204 22 / 18%);
+        color: #bef264;
+    }
+
     #preview-content-animation .preview-kicker {
         background: rgb(132 204 22 / 24%);
         color: #99f6e4;
@@ -324,6 +355,10 @@
 
     #preview-content-animation .ce-preview {
         background: color-mix(in srgb, var(--pc-preview-surface) 88%, black);
+    }
+
+    #preview-content-animation .preview-gallery__item {
+        background: rgb(15 23 42 / 70%);
     }
 
     #preview-content-animation .preview-meta span {
@@ -360,6 +395,10 @@
         width: min(92%, 520px);
         grid-template-columns: 82px minmax(0, 1fr);
     }
+
+    #preview-content-animation .preview-gallery {
+        grid-template-columns: repeat(2, minmax(90px, 1fr));
+    }
 }
 
 @media (max-width: 540px) {
@@ -368,7 +407,7 @@
     }
 
     #preview-content-animation .preview-stage {
-        min-height: 280px;
+        min-height: 360px;
     }
 }
 

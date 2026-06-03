@@ -212,18 +212,17 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '</div>';
 
         $previewLabel = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-label');
-        $gsapLogoPath = GeneralUtility::getFileAbsFileName(
-            'EXT:content_gsap_animation/Resources/Public/Images/gsap-greensock.svg'
-        );
-        $gsapLogoWebPath = PathUtility::getAbsoluteWebPath($gsapLogoPath);
+        $animationPreviewImages = [
+            'fade-up' => 'Fade up',
+            'slide-left' => 'Slide left',
+            'zoom-in' => 'Zoom in',
+            'flip-up' => 'Flip up',
+        ];
 
         $html[] = '<div id="preview-content-animation" role="group" aria-label="' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '">';
         $html[] = '<div class="preview-topline">';
         $html[] = '<span class="preview-label" data-show-preview="false">' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '</span>';
-        $html[] = '<span class="preview-brand">';
-        $html[] = '<span class="preview-brand-logo" style="background-image: url(' . htmlspecialchars($gsapLogoWebPath, ENT_COMPAT, 'UTF-8', false) . ');" aria-hidden="true"></span>';
-        $html[] = '<span>GSAP</span>';
-        $html[] = '</span>';
+        $html[] = '<span class="preview-brand" aria-label="GSAP">GSAP</span>';
         $html[] = '</div>';
         $html[] = '<div class="preview-shell">';
         $html[] = '<div class="preview-copy" aria-hidden="true">';
@@ -244,6 +243,18 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<div class="ce-preview__text-line"></div>';
         $html[] = '<div class="ce-preview__text-line ce-preview__text-line--short"></div>';
         $html[] = '</div>';
+        $html[] = '</div>';
+        $html[] = '<div class="preview-gallery" aria-label="Animation GIF examples">';
+        foreach ($animationPreviewImages as $animationKey => $animationLabel) {
+            $animationPreviewPath = GeneralUtility::getFileAbsFileName(
+                'EXT:content_gsap_animation/Resources/Public/Images/' . $animationKey . '.gif'
+            );
+            $animationPreviewWebPath = PathUtility::getAbsoluteWebPath($animationPreviewPath);
+            $html[] = '<figure class="preview-gallery__item">';
+            $html[] = '<img src="' . htmlspecialchars($animationPreviewWebPath, ENT_COMPAT, 'UTF-8', false) . '" alt="' . htmlspecialchars($animationLabel, ENT_COMPAT, 'UTF-8', false) . ' animation preview" loading="lazy" />';
+            $html[] = '<figcaption>' . htmlspecialchars($animationLabel, ENT_COMPAT, 'UTF-8', false) . '</figcaption>';
+            $html[] = '</figure>';
+        }
         $html[] = '</div>';
         $html[] = '<div class="preview-meta" aria-hidden="true">';
         $html[] = '<span>GSAP</span>';

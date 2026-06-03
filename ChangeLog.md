@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.5.2 - 2026-06-03
+### Fixed
+- [FIX] Replaced the cramped preview logo area with a clear GSAP wordmark badge.
+- [FIX] Tightened documentation preview spacing for a cleaner premium screenshot.
+
+### Added
+- [FEATURE] Added an animated backend preview GIF for README, documentation and releases.
+- [FEATURE] Added GIF preset examples to the TYPO3 backend preview so editors can compare animation possibilities.
+
 ## 3.5.1 - 2026-06-03
 ### Fixed
 - [FIX] Shortened backend preview copy so text cannot leave the preview panel.

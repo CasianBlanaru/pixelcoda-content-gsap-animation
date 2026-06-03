@@ -36,6 +36,14 @@ Screenshot
 
    Premium TYPO3 backend preview with GSAP, reduced-motion and automatic headless-output indicators
 
+.. figure:: ../Images/Settings/backend-animation-preview.gif
+   :width: 900px
+   :alt: Animated TYPO3 backend animation preview
+
+   Animated backend preview showing the GSAP animation preview behavior
+
+The backend preview also shows GIF examples for common presets such as fade, slide, zoom and flip. Editors can compare the animation possibilities directly in the content element form.
+
 Available Animation Types
 ==========================
 

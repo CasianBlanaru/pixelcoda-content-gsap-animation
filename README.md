@@ -13,7 +13,7 @@ GSAP-powered scroll animations for TYPO3 content elements. Editors choose an ani
 - Bootstrap Package v13, v14 and v15 support
 - Fade, slide, zoom and flip animation presets
 - Backend preview with duration, delay and easing support
-- Full-width premium backend preview with readable dark-mode styling, GreenSock branding and automatic headless-output indicator
+- Full-width premium backend preview with readable dark-mode styling, GSAP GIF preset examples and automatic headless-output indicator
 - Extended settings for offset, anchor placement, once and mirror behavior
 - BITV-friendly behavior via `prefers-reduced-motion`
 - Headless-ready structured animation data for custom renderers and APIs
@@ -46,9 +46,12 @@ The Bootstrap Package number refers to the Bootstrap Package major version, not 
 
 Open a content element and use the **Animation** tab. Select an animation preset and adjust timing. If extended settings are enabled in the extension configuration, editors can also set offset, anchor placement, once and mirror behavior.
 
+The backend preview shows the selected animation on a content-card mockup and displays GIF examples for common presets such as fade, slide, zoom and flip. This helps editors compare the animation possibilities without leaving the form.
+
 Existing documentation screenshots:
 
 - [Premium preview](Documentation/Images/Settings/premium-preview.png)
+- [Animated backend preview GIF](Documentation/Images/Settings/backend-animation-preview.gif)
 - [Animation tab](Documentation/Images/Settings/animation-tab.png)
 - [Extended settings](Documentation/Images/Settings/extended-settings.png)
 - [Footer label](Documentation/Images/Settings/footer-label.png)
