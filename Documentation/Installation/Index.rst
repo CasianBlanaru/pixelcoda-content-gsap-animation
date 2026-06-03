@@ -25,12 +25,25 @@ Then run the TYPO3 extension setup:
 Compatibility
 =============
 
-Version 3.2 supports TYPO3 12.4, TYPO3 13.4 and TYPO3 14.3.
+Version 3.5 supports TYPO3 12.4, TYPO3 13.4 and TYPO3 14.3+ within the TYPO3 14 release line.
 
 Setup
 =====
 
-Once the extension is installed and activated, simply add the **static TypoScript** to your site template and you're ready to go.
+TYPO3 13 and TYPO3 14 Site Sets
+-------------------------------
+
+For projects using Site Sets, add the provided dependency to your site configuration:
+
+.. code-block:: yaml
+
+   dependencies:
+     - pixelcoda/content-gsap-animation
+
+Classic TypoScript templates
+----------------------------
+
+If your project still uses classic TypoScript template includes, add the matching **static TypoScript** to your site template.
 
 .. note::
 
@@ -60,3 +73,22 @@ If you want to use your own GSAP versions, you can override the TypoScript setti
       gsap_scrolltrigger >
       gsap_scrolltrigger = EXT:your_extension/Resources/Public/JavaScript/ScrollTrigger.min.js
    }
+
+Lighthouse verification
+=======================
+
+The extension has been verified on a local TYPO3 test page with an animated content element and bundled GSAP assets:
+
+.. image:: ../Images/Reports/lighthouse-100.png
+   :alt: Lighthouse report with 100 scores for Performance, Accessibility, Best Practices and SEO
+
+Measured values:
+
+* Performance: 100
+* Accessibility: 100
+* Best Practices: 100
+* SEO: 100
+* First Contentful Paint: 0.8 s
+* Largest Contentful Paint: 1.4 s
+* Total Blocking Time: 0 ms
+* Cumulative Layout Shift: 0

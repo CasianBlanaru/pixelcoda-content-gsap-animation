@@ -1,5 +1,15 @@
-document.addEventListener('DOMContentLoaded', () => {
-    window.setTimeout(() => {
+const initializeContentGsapAnimations = () => {
+    if (window.__contentGsapAnimationInitialized === true) {
+        return;
+    }
+
+    const animatedElements = Array.from(document.querySelectorAll('[data-gsap-anim]'));
+    if (animatedElements.length === 0) {
+        return;
+    }
+    window.__contentGsapAnimationInitialized = true;
+
+    window.requestAnimationFrame(() => {
         const gsap = window.gsap;
         const AnimationDefinitions = window.AnimationDefinitions;
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -9,10 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (prefersReducedMotion) {
-            document.querySelectorAll('[data-gsap-anim]').forEach((element) => {
+            animatedElements.forEach((element) => {
                 element.removeAttribute('data-gsap-anim');
                 element.style.removeProperty('opacity');
                 element.style.removeProperty('transform');
+                element.style.removeProperty('will-change');
             });
             return;
         }
@@ -46,13 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const fromVars = {
                 ...animationDefinition.from,
                 immediateRender: false,
+                willChange: 'transform,opacity',
             };
             const toVars = {
                 ...animationDefinition.to,
                 duration,
                 delay,
                 ease,
-                clearProps: 'transform,opacity,visibility',
+                clearProps: 'transform,opacity,visibility,willChange',
             };
 
             if (ScrollTrigger) {
@@ -67,6 +79,26 @@ document.addEventListener('DOMContentLoaded', () => {
             gsap.fromTo(element, fromVars, toVars);
         };
 
-        document.querySelectorAll('[data-gsap-anim]').forEach(createAnimation);
-    }, 100);
-});
+        const gsapContext = typeof gsap.context === 'function'
+            ? gsap.context(() => animatedElements.forEach(createAnimation))
+            : null;
+
+        if (!gsapContext) {
+            animatedElements.forEach(createAnimation);
+        }
+
+        window.addEventListener('pagehide', () => {
+            if (gsapContext && typeof gsapContext.revert === 'function') {
+                gsapContext.revert();
+                return;
+            }
+            animatedElements.forEach((element) => gsap.killTweensOf(element));
+        }, { once: true });
+    });
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeContentGsapAnimations, { once: true });
+} else {
+    initializeContentGsapAnimations();
+}

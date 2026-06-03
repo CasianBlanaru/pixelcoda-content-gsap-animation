@@ -29,6 +29,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class AnimationPreviewField extends AbstractFormElement
 {
     /**
+     * @var array<string, string>
+     */
+    private static array $assetWebPathCache = [];
+
+    /**
      * @var array
      */
     protected $defaultFieldInformation = [
@@ -456,10 +461,7 @@ class AnimationPreviewField extends AbstractFormElement
     private function renderAnimationPreviewHtml(): array
     {
         $previewLabel = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-label');
-        $gsapLogoPath = GeneralUtility::getFileAbsFileName(
-            'EXT:content_gsap_animation/Resources/Public/Images/gsap-greensock.svg'
-        );
-        $gsapLogoWebPath = PathUtility::getAbsoluteWebPath($gsapLogoPath);
+        $gsapLogoWebPath = $this->getAssetWebPath('EXT:content_gsap_animation/Resources/Public/Images/gsap-greensock.svg');
         $animationPreviewImages = [
             'fade-up' => 'Fade up',
             'slide-left' => 'Slide left',
@@ -472,7 +474,7 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<div class="preview-topline">';
         $html[] = '<span class="preview-label" data-show-preview="false">' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '</span>';
         $html[] = '<span class="preview-brand" aria-label="GreenSock GSAP">';
-        $html[] = '<img src="' . htmlspecialchars($gsapLogoWebPath, ENT_COMPAT, 'UTF-8', false) . '" alt="" aria-hidden="true" loading="lazy" />';
+        $html[] = '<img src="' . htmlspecialchars($gsapLogoWebPath, ENT_COMPAT, 'UTF-8', false) . '" alt="" width="22" height="22" aria-hidden="true" loading="lazy" decoding="async" />';
         $html[] = '<span>GSAP</span>';
         $html[] = '</span>';
         $html[] = '</div>';
@@ -503,12 +505,11 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '</div>';
         $html[] = '<div class="preview-gallery" aria-label="Animation GIF examples">';
         foreach ($animationPreviewImages as $animationKey => $animationLabel) {
-            $animationPreviewPath = GeneralUtility::getFileAbsFileName(
+            $animationPreviewWebPath = $this->getAssetWebPath(
                 'EXT:content_gsap_animation/Resources/Public/Images/' . $animationKey . '.gif'
             );
-            $animationPreviewWebPath = PathUtility::getAbsoluteWebPath($animationPreviewPath);
             $html[] = '<figure class="preview-gallery__item">';
-            $html[] = '<img src="' . htmlspecialchars($animationPreviewWebPath, ENT_COMPAT, 'UTF-8', false) . '" alt="' . htmlspecialchars($animationLabel, ENT_COMPAT, 'UTF-8', false) . ' animation preview" loading="lazy" />';
+            $html[] = '<img src="' . htmlspecialchars($animationPreviewWebPath, ENT_COMPAT, 'UTF-8', false) . '" alt="' . htmlspecialchars($animationLabel, ENT_COMPAT, 'UTF-8', false) . ' animation preview" width="120" height="28" loading="lazy" decoding="async" />';
             $html[] = '<figcaption>' . htmlspecialchars($animationLabel, ENT_COMPAT, 'UTF-8', false) . '</figcaption>';
             $html[] = '</figure>';
         }
@@ -518,6 +519,17 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '</div>';
 
         return $html;
+    }
+
+    private function getAssetWebPath(string $assetPath): string
+    {
+        if (!isset(self::$assetWebPathCache[$assetPath])) {
+            self::$assetWebPathCache[$assetPath] = PathUtility::getAbsoluteWebPath(
+                GeneralUtility::getFileAbsFileName($assetPath)
+            );
+        }
+
+        return self::$assetWebPathCache[$assetPath];
     }
 
     private function buildSiblingFieldName(string $currentFieldName, string $targetFieldName): string
@@ -562,8 +574,8 @@ class AnimationPreviewField extends AbstractFormElement
         }
         $html[] = '<label class="form-label" for="' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . '">' . htmlspecialchars($label, ENT_COMPAT, 'UTF-8', false) . '</label>';
         $html[] = '<div class="pc-animation-range-control">';
-        $html[] = '<input id="' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . '" class="form-control" type="number" name="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8', false) . '" value="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8', false) . '" min="' . $min . '" max="' . $max . '" step="' . $step . '"' . $disabledAttribute . ' />';
-        $html[] = '<input class="form-range" type="range" value="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8', false) . '" min="' . $min . '" max="' . $max . '" step="' . $step . '" data-formengine-input-name="data[' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . ']"' . $disabledAttribute . ' />';
+        $html[] = '<input id="' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . '" class="form-control" type="number" name="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8', false) . '" value="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8', false) . '" min="' . $min . '" max="' . $max . '" step="' . $step . '" data-pc-animation-number="' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . '"' . $disabledAttribute . ' />';
+        $html[] = '<input class="form-range" type="range" value="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8', false) . '" min="' . $min . '" max="' . $max . '" step="' . $step . '" aria-label="' . htmlspecialchars($label, ENT_COMPAT, 'UTF-8', false) . '" data-pc-animation-range="' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . '"' . $disabledAttribute . ' />';
         $html[] = '</div>';
         $html[] = '</div>';
 
@@ -576,10 +588,11 @@ class AnimationPreviewField extends AbstractFormElement
     private function renderSelectControl(string $label, string $name, string $value, array $options, bool $disabled): string
     {
         $disabledAttribute = $disabled ? ' disabled="disabled"' : '';
+        $fieldId = StringUtility::getUniqueId('pc-animation-select-');
         $html = [];
         $html[] = '<div class="pc-animation-settings-field">';
-        $html[] = '<label class="form-label">' . htmlspecialchars($label, ENT_COMPAT, 'UTF-8', false) . '</label>';
-        $html[] = '<select class="form-control form-control-adapt" name="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8', false) . '"' . $disabledAttribute . '>';
+        $html[] = '<label class="form-label" for="' . htmlspecialchars($fieldId, ENT_COMPAT, 'UTF-8', false) . '">' . htmlspecialchars($label, ENT_COMPAT, 'UTF-8', false) . '</label>';
+        $html[] = '<select id="' . htmlspecialchars($fieldId, ENT_COMPAT, 'UTF-8', false) . '" class="form-control form-control-adapt" name="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8', false) . '"' . $disabledAttribute . '>';
         foreach ($options as $optionValue => $optionLabel) {
             $html[] = '<option value="' . htmlspecialchars($optionValue, ENT_COMPAT, 'UTF-8', false) . '"' . ($value === $optionValue ? ' selected="selected"' : '') . '>' . htmlspecialchars($optionLabel, ENT_COMPAT, 'UTF-8', false) . '</option>';
         }

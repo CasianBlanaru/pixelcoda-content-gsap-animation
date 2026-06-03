@@ -12,6 +12,24 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.5.12 - 2026-06-03
+===================
+
+Changed
+-------
+
+* Optimized frontend GSAP initialization to bail out on pages without animated elements and clean up animation contexts on page unload.
+* Added a TYPO3 v13 Site Set for modern project integration with Fluid Styled Content.
+* Reduced backend preview work with scoped initialization, timer cleanup, cached asset paths and a smaller minified stylesheet.
+* Improved backend form accessibility with explicit labels for extended select controls and stable image dimensions in the preview.
+* Documented TYPO3 14 compatibility and Site Set setup for modern TYPO3 projects.
+
+Fixed
+-----
+
+* Improved backend dark-mode contrast for the two-column animation settings UI.
+* Restored live synchronization for backend duration and delay sliders in TYPO3 14.
+
 3.5.11 - 2026-06-03
 ===================
 

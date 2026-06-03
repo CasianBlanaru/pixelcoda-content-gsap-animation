@@ -8,7 +8,7 @@ GSAP-powered scroll animations for TYPO3 content elements. Editors choose an ani
 
 ## Highlights
 
-- TYPO3 12.4, 13.4 and 14.3 compatible
+- TYPO3 12.4, 13.4 and 14.3+ compatible within the TYPO3 14 release line
 - Fluid Styled Content support
 - Bootstrap Package v13, v14 and v15 support
 - Fade, slide, zoom and flip animation presets
@@ -33,7 +33,14 @@ vendor/bin/typo3 extension:setup
 
 ## TYPO3 Setup
 
-Include the matching TypoScript setup for your rendering stack:
+For TYPO3 13 and TYPO3 14 projects using Site Sets, add the Site Set dependency:
+
+```yaml
+dependencies:
+  - pixelcoda/content-gsap-animation
+```
+
+For classic TypoScript templates, include the matching setup for your rendering stack:
 
 - `Content GSAP Animation: Fluid Styled Content`
 - `Content GSAP Animation: Bootstrap Package v13.x`
@@ -51,10 +58,26 @@ The backend preview shows the selected animation on a content-card mockup and di
 Documentation media:
 
 - [Original TYPO3 backend settings flow GIF](Documentation/Images/Settings/backend-settings-animation-flow.gif)
+- [Lighthouse 100 report](Documentation/Images/Reports/lighthouse-100.png)
 - [Static premium preview](Documentation/Images/Settings/premium-preview.png)
 - [Animation tab](Documentation/Images/Settings/animation-tab.png)
 - [Extended settings](Documentation/Images/Settings/extended-settings.png)
 - [Footer label](Documentation/Images/Settings/footer-label.png)
+
+## Lighthouse
+
+![Lighthouse 100 report](Documentation/Images/Reports/lighthouse-100.png)
+
+Verified on the local TYPO3 test page with an animated content element and bundled GSAP assets:
+
+- Performance: 100
+- Accessibility: 100
+- Best Practices: 100
+- SEO: 100
+- FCP: 0.8 s
+- LCP: 1.4 s
+- TBT: 0 ms
+- CLS: 0
 
 ## Accessibility
 

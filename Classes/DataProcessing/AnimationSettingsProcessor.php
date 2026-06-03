@@ -33,6 +33,8 @@ class AnimationSettingsProcessor implements DataProcessorInterface
         'mirror' => 'data-gsap-mirror',
     ];
     private const DATA_COLUMN_PREFIX = 'tx_content_gsap_animation_';
+    private const INTEGER_FIELDS = ['duration', 'delay', 'offset'];
+    private const TRUE_VALUES = [1, '1', true, 'true'];
 
     /**
      * Process data for content animations
@@ -44,8 +46,7 @@ class AnimationSettingsProcessor implements DataProcessorInterface
         array $processedData
     ): array {
         $dataObj = $processedData['data'] ?? [];
-        $gsapSettingsArray = $this->mapFieldsToGsapAttributes($dataObj);
-        $structuredGsapSettings = $this->mapFieldsToStructuredSettings($dataObj);
+        [$gsapSettingsArray, $structuredGsapSettings] = $this->buildAnimationSettings(is_array($dataObj) ? $dataObj : []);
         $completeGsapSettings = $this->generateGsapAttributeString($gsapSettingsArray);
         $this->setSettingsToProcessedData(
             $cObj,
@@ -57,52 +58,35 @@ class AnimationSettingsProcessor implements DataProcessorInterface
         return $processedData;
     }
 
-    private function mapFieldsToGsapAttributes(array $dataObj): array
+    /**
+     * @param array<string, mixed> $dataObj
+     * @return array{array<string, string>, array<string, bool|int|string>}
+     */
+    private function buildAnimationSettings(array $dataObj): array
     {
         if ((string)($dataObj[self::DATA_COLUMN_PREFIX . 'animation'] ?? '') === '') {
-            return [];
+            return [[], []];
         }
 
         $gsapOptions = [];
+        $structuredSettings = [];
         foreach (self::GSAP_ATTRIBUTE_MAP as $field => $attr) {
             $value = $dataObj[self::DATA_COLUMN_PREFIX . $field] ?? '';
             if ($value !== '') {
                 $gsapOptions[$attr] = (string)$value;
+                $structuredSettings[$this->normalizeSettingKey($field)] = $this->normalizeSettingValue($field, $value);
             }
         }
         foreach (self::GSAP_BOOLEAN_ATTRIBUTE_MAP as $field => $attr) {
             if (array_key_exists(self::DATA_COLUMN_PREFIX . $field, $dataObj)) {
                 $value = $dataObj[self::DATA_COLUMN_PREFIX . $field];
-                $gsapOptions[$attr] = in_array($value, [1, '1', true, 'true'], true) ? 'true' : 'false';
-            }
-        }
-        return $gsapOptions;
-    }
-
-    /**
-     * @return array<string, bool|int|string>
-     */
-    private function mapFieldsToStructuredSettings(array $dataObj): array
-    {
-        if ((string)($dataObj[self::DATA_COLUMN_PREFIX . 'animation'] ?? '') === '') {
-            return [];
-        }
-
-        $settings = [];
-        foreach (self::GSAP_ATTRIBUTE_MAP as $field => $_attributeName) {
-            $value = $dataObj[self::DATA_COLUMN_PREFIX . $field] ?? '';
-            if ($value === '') {
-                continue;
-            }
-            $settings[$this->normalizeSettingKey($field)] = $this->normalizeSettingValue($field, $value);
-        }
-        foreach (self::GSAP_BOOLEAN_ATTRIBUTE_MAP as $field => $_attributeName) {
-            if (array_key_exists(self::DATA_COLUMN_PREFIX . $field, $dataObj)) {
-                $settings[$field] = in_array($dataObj[self::DATA_COLUMN_PREFIX . $field], [1, '1', true, 'true'], true);
+                $isEnabled = in_array($value, self::TRUE_VALUES, true);
+                $gsapOptions[$attr] = $isEnabled ? 'true' : 'false';
+                $structuredSettings[$field] = $isEnabled;
             }
         }
 
-        return $settings;
+        return [$gsapOptions, $structuredSettings];
     }
 
     private function normalizeSettingKey(string $field): string
@@ -112,7 +96,7 @@ class AnimationSettingsProcessor implements DataProcessorInterface
 
     private function normalizeSettingValue(string $field, mixed $value): int|string
     {
-        if (in_array($field, ['duration', 'delay', 'offset'], true)) {
+        if (in_array($field, self::INTEGER_FIELDS, true)) {
             return (int)$value;
         }
 
@@ -123,7 +107,7 @@ class AnimationSettingsProcessor implements DataProcessorInterface
     {
         $gsapSettings = '';
         foreach ($gsapSettingsArray as $key => $value) {
-            $gsapSettings .= ' ' . $key . '="' . htmlspecialchars($value, ENT_QUOTES) . '"';
+            $gsapSettings .= ' ' . $key . '="' . htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '"';
         }
         return $gsapSettings;
     }

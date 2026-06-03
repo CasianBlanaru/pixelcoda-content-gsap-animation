@@ -1,12 +1,18 @@
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    const previewElement = document.querySelector('.ce-preview');
+const initializeContentAnimationPreview = () => {
+  const previewRoot = document.querySelector('#preview-content-animation');
+  if (!previewRoot || previewRoot.dataset.initialized === 'true') {
+    return;
+  }
+  previewRoot.dataset.initialized = 'true';
+
+  window.requestAnimationFrame(() => {
+    const previewElement = previewRoot.querySelector('.ce-preview');
     const animationSelectField = document.querySelector('[name*="[tx_content_gsap_animation_animation]"]');
-    const durationInputField = document.querySelector('[data-formengine-input-name*="[tx_content_gsap_animation_duration]"]');
-    const durationValueInputField = document.querySelector('[name*="[tx_content_gsap_animation_duration]"]');
+    const durationInputField = document.querySelector('[data-pc-animation-range="tx_content_gsap_animation_duration"]');
+    const durationValueInputField = document.querySelector('[data-pc-animation-number="tx_content_gsap_animation_duration"]');
     const easingField = document.querySelector('[name*="[tx_content_gsap_animation_easing]"]');
-    const delayField = document.querySelector('[name*="[tx_content_gsap_animation_delay]"]');
-    const delayRangeField = document.querySelector('[data-formengine-input-name*="[tx_content_gsap_animation_delay]"]');
+    const delayField = document.querySelector('[data-pc-animation-number="tx_content_gsap_animation_delay"]');
+    const delayRangeField = document.querySelector('[data-pc-animation-range="tx_content_gsap_animation_delay"]');
     const previewLabel = document.querySelector('#preview-content-animation .preview-label');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -20,6 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let defaultPreviewDuration = 800;
     const pauseBetweenLoops = 1000;
     let animationInterval = null;
+    let pauseTimeout = null;
+
+    function clearPreviewTimers() {
+      if (animationInterval) {
+        clearInterval(animationInterval);
+        animationInterval = null;
+      }
+      if (pauseTimeout) {
+        clearTimeout(pauseTimeout);
+        pauseTimeout = null;
+      }
+    }
 
     function playGSAPPreview() {
       if (prefersReducedMotion) {
@@ -56,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ease: currentEase,
           clearProps: 'all',
           onComplete: () => {
-            setTimeout(() => {
+            pauseTimeout = setTimeout(() => {
               gsap.to(previewElement, { opacity: 0, duration: 0.3 });
             }, pauseBetweenLoops);
           }
@@ -65,13 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startPreviewLoop() {
-      if (animationInterval) clearInterval(animationInterval);
+      clearPreviewTimers();
       playGSAPPreview();
 
       const currentDelayValue = delayField && delayField.value ? parseFloat(delayField.value) : 0;
       const totalCycleTime = defaultPreviewDuration + currentDelayValue + pauseBetweenLoops + 300;
 
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && document.visibilityState !== 'hidden') {
         animationInterval = setInterval(playGSAPPreview, totalCycleTime);
       }
     }
@@ -86,6 +104,23 @@ document.addEventListener('DOMContentLoaded', () => {
       startPreviewLoop();
     }
 
+    function syncFieldValue(targetField, value) {
+      if (!targetField || targetField.value === value) {
+        return;
+      }
+      targetField.value = value;
+      targetField.dispatchEvent(new Event('input', { bubbles: true }));
+      targetField.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    function addLiveListener(field, callback) {
+      if (!field) {
+        return;
+      }
+      field.addEventListener('input', callback);
+      field.addEventListener('change', callback);
+    }
+
     function initialize() {
       previewElement.classList.add('gsap-preview');
 
@@ -93,8 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
         animationSelectField.addEventListener('change', handleParameterChange);
       }
       if (durationInputField) {
-        durationInputField.addEventListener('change', (event) => {
-            if(durationValueInputField) durationValueInputField.value = event.target.value;
+        addLiveListener(durationInputField, (event) => {
+            syncFieldValue(durationValueInputField, event.target.value);
             handleParameterChange();
         });
       }
@@ -105,8 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 durationValueInputField.value = defaultPreviewDuration;
             }
-           durationValueInputField.addEventListener('change', (event) => {
-               if(durationInputField && durationInputField.value !== event.target.value) durationInputField.value = event.target.value;
+           addLiveListener(durationValueInputField, (event) => {
+               syncFieldValue(durationInputField, event.target.value);
                handleParameterChange();
            });
        }
@@ -116,18 +151,40 @@ document.addEventListener('DOMContentLoaded', () => {
         easingField.addEventListener('change', handleParameterChange);
       }
       if (delayField) {
-        delayField.addEventListener('change', handleParameterChange);
-      }
-      if (delayRangeField) {
-        delayRangeField.addEventListener('change', (event) => {
-          if (delayField) delayField.value = event.target.value;
+        addLiveListener(delayField, (event) => {
+          syncFieldValue(delayRangeField, event.target.value);
           handleParameterChange();
         });
       }
+      if (delayRangeField) {
+        addLiveListener(delayRangeField, (event) => {
+          syncFieldValue(delayField, event.target.value);
+          handleParameterChange();
+        });
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          clearPreviewTimers();
+          gsap.killTweensOf(previewElement);
+          return;
+        }
+        startPreviewLoop();
+      });
+      window.addEventListener('pagehide', () => {
+        clearPreviewTimers();
+        gsap.killTweensOf(previewElement);
+      }, { once: true });
 
       startPreviewLoop();
     }
 
     initialize();
-  }, 100); 
-});
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeContentAnimationPreview, { once: true });
+} else {
+  initializeContentAnimationPreview();
+}

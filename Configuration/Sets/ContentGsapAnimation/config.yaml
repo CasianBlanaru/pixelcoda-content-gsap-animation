@@ -1,0 +1,4 @@
+name: pixelcoda/content-gsap-animation
+label: Pixelcoda Content GSAP Animation
+dependencies:
+  - typo3/fluid-styled-content
