@@ -9,6 +9,7 @@
       const durationValueInputField = document.querySelector('[name*="[tx_content_gsap_animation_duration]"]');
       const easingField = document.querySelector('[name*="[tx_content_gsap_animation_easing]"]');
       const delayField = document.querySelector('[name*="[tx_content_gsap_animation_delay]"]');
+      const delayRangeField = document.querySelector('[data-formengine-input-name*="[tx_content_gsap_animation_delay]"]');
       const previewLabel = document.querySelector('#preview-content-animation .preview-label');
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -119,6 +120,12 @@
         }
         if (delayField) {
           delayField.addEventListener('change', handleParameterChange);
+        }
+        if (delayRangeField) {
+          delayRangeField.addEventListener('change', (event) => {
+            if (delayField) delayField.value = event.target.value;
+            handleParameterChange();
+          });
         }
 
         startPreviewLoop();

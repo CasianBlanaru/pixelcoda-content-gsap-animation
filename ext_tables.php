@@ -19,9 +19,7 @@ if (!$disableAddAnimationsTab && !$extendedAnimationSettings) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', '
     --div--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:tab.animation,
     --palette--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:palette.animation-settings;
-        tx_content_gsap_animation_animation,
-    --palette--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:palette.timing-settings;
-        tx_content_gsap_animation_timing
+        tx_content_gsap_animation_animation
 	'
     );
 }
@@ -31,11 +29,7 @@ if (!$disableAddAnimationsTab && $extendedAnimationSettings) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', '
 	--div--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:tab.animation,
 	--palette--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:palette.animation-settings;
-		tx_content_gsap_animation_animation,
-	--palette--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:palette.timing-settings;
-		tx_content_gsap_animation_timing,
-	--palette--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:palette.extended-settings;
-		tx_content_gsap_animation_extended
+		tx_content_gsap_animation_animation
 	'
     );
 }

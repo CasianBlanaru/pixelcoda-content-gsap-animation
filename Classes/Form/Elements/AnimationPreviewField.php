@@ -6,6 +6,7 @@ namespace Pixelcoda\ContentGsapAnimation\Form\Elements;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Form\Utility\FormEngineUtility;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -190,8 +191,16 @@ class AnimationPreviewField extends AbstractFormElement
             $translatedFieldLabel = $resolvedFieldLabel !== '' ? $resolvedFieldLabel : $fieldLabel;
         }
 
+        $extendedAnimationSettings = (bool)(
+            GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('content_gsap_animation')['extendedAnimationSettings'] ?? false
+        );
+
         $html = [];
+        $html[] = '<div class="pc-animation-editor-layout">';
+        $html[] = '<div class="pc-animation-preview-column">';
         $html = array_merge($html, $this->renderAnimationPreviewHtml());
+        $html[] = '</div>';
+        $html[] = '<div class="pc-animation-fields-column">';
         $html[] = '<div class="formengine-field-item t3js-formengine-field-item">';
         $html[] = $fieldInformationHtml;
         if ($translatedFieldLabel !== '') {
@@ -221,6 +230,87 @@ class AnimationPreviewField extends AbstractFormElement
             $html[] = '</div>';
         }
         $html[] = '</div>';
+        $html[] = '</div>';
+        $html[] = '</div>';
+        $html[] = $this->renderNumberControl(
+            'Timing settings',
+            'Duration in milliseconds',
+            $this->buildSiblingFieldName($parameterArray['itemFormElName'], 'tx_content_gsap_animation_duration'),
+            $this->getDatabaseRowValue('tx_content_gsap_animation_duration', '800'),
+            400,
+            3000,
+            50,
+            'tx_content_gsap_animation_duration',
+            $disabled
+        );
+        $html[] = $this->renderNumberControl(
+            '',
+            'Delay in milliseconds',
+            $this->buildSiblingFieldName($parameterArray['itemFormElName'], 'tx_content_gsap_animation_delay'),
+            $this->getDatabaseRowValue('tx_content_gsap_animation_delay', '0'),
+            0,
+            3000,
+            50,
+            'tx_content_gsap_animation_delay',
+            $disabled
+        );
+        if ($extendedAnimationSettings) {
+            $html[] = '<div class="pc-animation-settings-section">';
+            $html[] = '<h4>Extended animation settings</h4>';
+            $html[] = '<div class="pc-animation-toggle-grid">';
+            $html[] = $this->renderCheckboxControl(
+                'Play animation once',
+                'Whether animation should happen only once - while scrolling down',
+                $this->buildSiblingFieldName($parameterArray['itemFormElName'], 'tx_content_gsap_animation_once'),
+                $this->getDatabaseRowValue('tx_content_gsap_animation_once', '1'),
+                $disabled
+            );
+            $html[] = $this->renderCheckboxControl(
+                'Mirror',
+                'Animations animate out while scrolling past them',
+                $this->buildSiblingFieldName($parameterArray['itemFormElName'], 'tx_content_gsap_animation_mirror'),
+                $this->getDatabaseRowValue('tx_content_gsap_animation_mirror', '0'),
+                $disabled
+            );
+            $html[] = '</div>';
+            $html[] = $this->renderSelectControl('Easing', $this->buildSiblingFieldName($parameterArray['itemFormElName'], 'tx_content_gsap_animation_easing'), $this->getDatabaseRowValue('tx_content_gsap_animation_easing', ''), [
+                '' => '',
+                'linear' => 'linear',
+                'power1.out' => 'power1.out',
+                'power2.out' => 'power2.out',
+                'power3.out' => 'power3.out',
+                'power4.out' => 'power4.out',
+                'back.out' => 'back.out',
+                'bounce.out' => 'bounce.out',
+                'circ.out' => 'circ.out',
+                'expo.out' => 'expo.out',
+                'sine.out' => 'sine.out',
+            ], $disabled);
+            $html[] = $this->renderSelectControl('Anchor placement', $this->buildSiblingFieldName($parameterArray['itemFormElName'], 'tx_content_gsap_animation_anchor_placement'), $this->getDatabaseRowValue('tx_content_gsap_animation_anchor_placement', ''), [
+                '' => '',
+                'top-bottom' => 'top-bottom',
+                'top-center' => 'top-center',
+                'top-top' => 'top-top',
+                'center-bottom' => 'center-bottom',
+                'center-center' => 'center-center',
+                'center-top' => 'center-top',
+                'bottom-bottom' => 'bottom-bottom',
+                'bottom-center' => 'bottom-center',
+                'bottom-top' => 'bottom-top',
+            ], $disabled);
+            $html[] = $this->renderNumberControl(
+                '',
+                'Offset in pixels',
+                $this->buildSiblingFieldName($parameterArray['itemFormElName'], 'tx_content_gsap_animation_offset'),
+                $this->getDatabaseRowValue('tx_content_gsap_animation_offset', '0'),
+                -1000,
+                1000,
+                10,
+                'tx_content_gsap_animation_offset',
+                $disabled
+            );
+            $html[] = '</div>';
+        }
         $html[] = '</div>';
         $html[] = '</div>';
 
@@ -428,6 +518,87 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '</div>';
 
         return $html;
+    }
+
+    private function buildSiblingFieldName(string $currentFieldName, string $targetFieldName): string
+    {
+        $fieldName = preg_replace(
+            '/\[tx_content_gsap_animation_animation\](\[\])?$/',
+            '[' . $targetFieldName . ']',
+            $currentFieldName
+        );
+
+        return is_string($fieldName) ? $fieldName : $currentFieldName;
+    }
+
+    private function getDatabaseRowValue(string $fieldName, string $default): string
+    {
+        $databaseRow = $this->data['databaseRow'] ?? [];
+        $value = is_array($databaseRow) ? ($databaseRow[$fieldName] ?? $default) : $default;
+        if (is_array($value)) {
+            $firstValue = reset($value);
+            $value = $firstValue !== false ? $firstValue : $default;
+        }
+
+        return (string)$value;
+    }
+
+    private function renderNumberControl(
+        string $headline,
+        string $label,
+        string $name,
+        string $value,
+        int $min,
+        int $max,
+        int $step,
+        string $fieldName,
+        bool $disabled
+    ): string {
+        $disabledAttribute = $disabled ? ' disabled="disabled"' : '';
+        $html = [];
+        $html[] = '<div class="pc-animation-settings-section">';
+        if ($headline !== '') {
+            $html[] = '<h4>' . htmlspecialchars($headline, ENT_COMPAT, 'UTF-8', false) . '</h4>';
+        }
+        $html[] = '<label class="form-label" for="' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . '">' . htmlspecialchars($label, ENT_COMPAT, 'UTF-8', false) . '</label>';
+        $html[] = '<div class="pc-animation-range-control">';
+        $html[] = '<input id="' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . '" class="form-control" type="number" name="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8', false) . '" value="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8', false) . '" min="' . $min . '" max="' . $max . '" step="' . $step . '"' . $disabledAttribute . ' />';
+        $html[] = '<input class="form-range" type="range" value="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8', false) . '" min="' . $min . '" max="' . $max . '" step="' . $step . '" data-formengine-input-name="data[' . htmlspecialchars($fieldName, ENT_COMPAT, 'UTF-8', false) . ']"' . $disabledAttribute . ' />';
+        $html[] = '</div>';
+        $html[] = '</div>';
+
+        return implode(LF, $html);
+    }
+
+    /**
+     * @param array<string, string> $options
+     */
+    private function renderSelectControl(string $label, string $name, string $value, array $options, bool $disabled): string
+    {
+        $disabledAttribute = $disabled ? ' disabled="disabled"' : '';
+        $html = [];
+        $html[] = '<div class="pc-animation-settings-field">';
+        $html[] = '<label class="form-label">' . htmlspecialchars($label, ENT_COMPAT, 'UTF-8', false) . '</label>';
+        $html[] = '<select class="form-control form-control-adapt" name="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8', false) . '"' . $disabledAttribute . '>';
+        foreach ($options as $optionValue => $optionLabel) {
+            $html[] = '<option value="' . htmlspecialchars($optionValue, ENT_COMPAT, 'UTF-8', false) . '"' . ($value === $optionValue ? ' selected="selected"' : '') . '>' . htmlspecialchars($optionLabel, ENT_COMPAT, 'UTF-8', false) . '</option>';
+        }
+        $html[] = '</select>';
+        $html[] = '</div>';
+
+        return implode(LF, $html);
+    }
+
+    private function renderCheckboxControl(string $label, string $description, string $name, string $value, bool $disabled): string
+    {
+        $disabledAttribute = $disabled ? ' disabled="disabled"' : '';
+        $checkedAttribute = $value === '1' ? ' checked="checked"' : '';
+
+        return '<label class="pc-animation-toggle">'
+            . '<input type="hidden" name="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8', false) . '" value="0" />'
+            . '<input type="checkbox" name="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8', false) . '" value="1"' . $checkedAttribute . $disabledAttribute . ' />'
+            . '<span><strong>' . htmlspecialchars($label, ENT_COMPAT, 'UTF-8', false) . '</strong><small>' . htmlspecialchars($description, ENT_COMPAT, 'UTF-8', false) . '</small></span>'
+            . '</label>';
     }
 
     protected function renderFieldInformation(): array
