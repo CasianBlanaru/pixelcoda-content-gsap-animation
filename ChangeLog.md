@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.5.9 - 2026-06-03
+### Changed
+- [IMPROVEMENT] Kept the normal TYPO3 backend fields and refined the preview itself into a two-column layout.
+- [IMPROVEMENT] Added the GSAP GreenSock SVG logo to the backend preview and documentation GIF.
+
 ## 3.5.8 - 2026-06-03
 ### Changed
 - [IMPROVEMENT] Kept the backend animation preview in a two-column layout for TYPO3 editor workspaces.

@@ -224,6 +224,10 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '</div>';
 
         $previewLabel = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-label');
+        $gsapLogoPath = GeneralUtility::getFileAbsFileName(
+            'EXT:content_gsap_animation/Resources/Public/Images/gsap-greensock.svg'
+        );
+        $gsapLogoWebPath = PathUtility::getAbsoluteWebPath($gsapLogoPath);
         $animationPreviewImages = [
             'fade-up' => 'Fade up',
             'slide-left' => 'Slide left',
@@ -234,15 +238,12 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<div id="preview-content-animation" role="group" aria-label="' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '">';
         $html[] = '<div class="preview-topline">';
         $html[] = '<span class="preview-label" data-show-preview="false">' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '</span>';
-        $html[] = '<span class="preview-brand" aria-label="GSAP">GSAP</span>';
+        $html[] = '<span class="preview-brand" aria-label="GreenSock GSAP">';
+        $html[] = '<img src="' . htmlspecialchars($gsapLogoWebPath, ENT_COMPAT, 'UTF-8', false) . '" alt="" aria-hidden="true" loading="lazy" />';
+        $html[] = '<span>GSAP</span>';
+        $html[] = '</span>';
         $html[] = '</div>';
         $html[] = '<div class="preview-shell">';
-        $html[] = '<div class="preview-copy" aria-hidden="true">';
-        $html[] = '<span class="preview-kicker">ScrollTrigger</span>';
-        $html[] = '<span class="preview-title">Preview</span>';
-        $html[] = '<span class="preview-description">Live GSAP preview with reduced-motion support.</span>';
-        $html[] = '<span class="preview-headless-note">Headless data: automatic</span>';
-        $html[] = '</div>';
         $html[] = '<div class="preview-stage">';
         $html[] = '<div class="preview-stage__rail" aria-hidden="true"></div>';
         $html[] = '<div class="ce-preview" aria-hidden="true">';
@@ -256,6 +257,17 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<div class="ce-preview__text-line ce-preview__text-line--short"></div>';
         $html[] = '</div>';
         $html[] = '</div>';
+        $html[] = '</div>';
+        $html[] = '<div class="preview-copy" aria-hidden="true">';
+        $html[] = '<span class="preview-kicker">ScrollTrigger</span>';
+        $html[] = '<span class="preview-title">Animation preview</span>';
+        $html[] = '<span class="preview-description">Live GSAP preview with reduced-motion support.</span>';
+        $html[] = '<span class="preview-headless-note">Headless data: automatic</span>';
+        $html[] = '<div class="preview-meta" aria-hidden="true">';
+        $html[] = '<span>GSAP</span>';
+        $html[] = '<span>Reduced motion</span>';
+        $html[] = '<span>Headless automatic</span>';
+        $html[] = '</div>';
         $html[] = '<div class="preview-gallery" aria-label="Animation GIF examples">';
         foreach ($animationPreviewImages as $animationKey => $animationLabel) {
             $animationPreviewPath = GeneralUtility::getFileAbsFileName(
@@ -267,11 +279,6 @@ class AnimationPreviewField extends AbstractFormElement
             $html[] = '<figcaption>' . htmlspecialchars($animationLabel, ENT_COMPAT, 'UTF-8', false) . '</figcaption>';
             $html[] = '</figure>';
         }
-        $html[] = '</div>';
-        $html[] = '<div class="preview-meta" aria-hidden="true">';
-        $html[] = '<span>GSAP</span>';
-        $html[] = '<span>Reduced motion</span>';
-        $html[] = '<span>Headless automatic</span>';
         $html[] = '</div>';
         $html[] = '</div>';
         $html[] = '</div>';

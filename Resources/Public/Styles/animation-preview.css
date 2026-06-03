@@ -92,19 +92,27 @@
 #preview-content-animation .preview-brand {
     flex: 0 0 auto;
     min-height: 26px;
-    padding: 3px 10px;
+    padding: 2px 9px 2px 4px;
     border: 1px solid rgb(15 118 110 / 45%);
     border-radius: 999px;
     background: rgb(132 204 22 / 20%);
     color: var(--pc-preview-accent);
     font-size: 12px;
     font-weight: 900;
-    letter-spacing: .04em;
+    letter-spacing: 0;
+}
+
+#preview-content-animation .preview-brand img {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    object-fit: contain;
 }
 
 #preview-content-animation .preview-shell {
     display: grid;
-    grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+    grid-template-columns: minmax(360px, 1fr) minmax(260px, 340px);
     gap: 12px;
     align-items: stretch;
     min-width: 0;
@@ -113,8 +121,8 @@
 #preview-content-animation .preview-copy {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    min-height: 150px;
+    justify-content: flex-start;
+    min-height: 210px;
     padding: 12px;
     min-width: 0;
     border: 1px solid rgb(148 163 184 / 38%);
@@ -144,7 +152,7 @@
 
 #preview-content-animation .preview-description,
 #preview-content-animation .preview-headless-note {
-    max-width: 30ch;
+    max-width: none;
     color: var(--pc-preview-panel-muted);
     font-size: 12px;
     line-height: 1.45;
@@ -153,7 +161,6 @@
 
 #preview-content-animation .preview-headless-note {
     display: block;
-    max-width: 32ch;
     margin-top: 10px;
     padding-top: 9px;
     border-top: 1px solid rgb(148 163 184 / 32%);
@@ -169,7 +176,7 @@
     gap: 8px;
     min-width: 0;
     min-height: 210px;
-    padding: 28px 10px 10px;
+    padding: 34px 14px 14px;
     overflow: hidden;
     border: 1px solid rgb(148 163 184 / 45%);
     border-radius: 7px;
@@ -215,7 +222,7 @@
     grid-template-columns: minmax(82px, 108px) minmax(120px, 1fr);
     gap: 16px;
     box-sizing: border-box;
-    width: min(76%, 420px);
+    width: min(82%, 460px);
     max-width: calc(100% - 20px);
     min-height: 82px;
     padding: 10px;
@@ -230,9 +237,10 @@
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    grid-template-columns: repeat(2, minmax(96px, 1fr));
     gap: 6px;
-    width: min(92%, 560px);
+    width: 100%;
+    margin-top: 10px;
 }
 
 #preview-content-animation .preview-gallery__item {
@@ -344,9 +352,10 @@
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 6px;
-    width: min(92%, 620px);
+    width: 100%;
+    margin-top: 10px;
 }
 
 #preview-content-animation .preview-meta span {
