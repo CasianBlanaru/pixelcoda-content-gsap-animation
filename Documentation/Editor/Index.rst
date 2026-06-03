@@ -36,12 +36,6 @@ Backend Preview
 
    Original TYPO3 backend flow showing animation settings, preset changes, preview and timing controls
 
-.. figure:: ../Images/Settings/backend-animation-preview.gif
-   :width: 900px
-   :alt: Animated TYPO3 backend animation preview
-
-   Animated backend preview showing the GSAP animation preview behavior
-
 .. figure:: ../Images/Settings/premium-preview.png
    :width: 900px
    :alt: Static premium preview of the animation in the TYPO3 backend
