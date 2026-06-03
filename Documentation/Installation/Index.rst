@@ -79,6 +79,9 @@ Lighthouse verification
 
 The extension has been verified on a local TYPO3 test page with an animated content element and bundled GSAP assets:
 
+.. image:: ../Images/Reports/frontend-styled.png
+   :alt: Styled frontend demo for Pixelcoda Content GSAP Animation
+
 .. image:: ../Images/Reports/lighthouse-100.png
    :alt: Lighthouse report with 100 scores for Performance, Accessibility, Best Practices and SEO
 
@@ -88,7 +91,7 @@ Measured values:
 * Accessibility: 100
 * Best Practices: 100
 * SEO: 100
-* First Contentful Paint: 0.8 s
-* Largest Contentful Paint: 1.4 s
-* Total Blocking Time: 0 ms
+* First Contentful Paint: 1.2 s
+* Largest Contentful Paint: 1.7 s
+* Total Blocking Time: 20 ms
 * Cumulative Layout Shift: 0
