@@ -148,15 +148,16 @@ class AnimationPreviewField extends AbstractFormElement
 
         // Process groups
         foreach ($selectItemGroups as $selectItemGroup) {
-            if (!isset($selectItemGroup['items']) || $selectItemGroup['items'] === []) {
+            $groupItems = $selectItemGroup['items'] ?? [];
+            if ($groupItems === []) {
                 continue;
             }
 
-            $optionGroup = isset($selectItemGroup['header']) && is_array($selectItemGroup['header']);
-            $groupTitle = $optionGroup ? ($selectItemGroup['header']['title'] ?? '') : '';
+            $groupTitle = (string)($selectItemGroup['header']['title'] ?? '');
+            $optionGroup = $groupTitle !== '';
             $options .= $optionGroup ? '<optgroup label="' . htmlspecialchars($groupTitle, ENT_COMPAT, 'UTF-8', false) . '">' : '';
 
-            foreach ($selectItemGroup['items'] as $item) {
+            foreach ($groupItems as $item) {
                 $options .= sprintf(
                     '<option value="%s" data-icon="%s"%s>%s</option>',
                     htmlspecialchars((string) $item['value']),
@@ -214,10 +215,12 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '</div>';
         $html[] = '</div>';
 
-        $html[] = '<div id="preview-content-animation">';
         $previewLabel = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-label');
-        $html[] = '<div class="preview-label" data-show-preview="false">' . ($previewLabel ?? '') . '</div>';
-        $html[] = '<div class="ce-preview">';
+        $previewHelp = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-help');
+        $html[] = '<div id="preview-content-animation" role="group" aria-label="' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '">';
+        $html[] = '<div class="preview-label" data-show-preview="false">' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '</div>';
+        $html[] = '<div class="preview-help">' . htmlspecialchars((string)($previewHelp ?? ''), ENT_COMPAT, 'UTF-8', false) . '</div>';
+        $html[] = '<div class="ce-preview" aria-hidden="true">';
         $html[] = '<div class="ce-preview__visual-placeholder"></div>';
         $html[] = '<div class="ce-preview__text-line"></div>';
         $html[] = '<div class="ce-preview__text-line ce-preview__text-line--short"></div>';
@@ -228,7 +231,8 @@ class AnimationPreviewField extends AbstractFormElement
             'html' => implode(LF, $html),
             'additionalInlineLanguageLabelFiles' => [],
             'stylesheetFiles' => [
-                'EXT:content_gsap_animation/Resources/Public/Styles/animation-preview.min.css',            ],
+                'EXT:content_gsap_animation/Resources/Public/Styles/animation-preview.min.css',
+            ],
         ];
 
         // Load GSAP and ScrollTrigger
@@ -266,10 +270,10 @@ class AnimationPreviewField extends AbstractFormElement
             false,
             '',
             true,
-            '|defer',
+            '|',
             false,
             '',
-            'gsap'
+            true
         );
 
         // Load Animation Definitions
@@ -286,9 +290,10 @@ class AnimationPreviewField extends AbstractFormElement
             false,  // $forceOnTop
             '',     // $allWrap
             true,   // $typo3PageModuleRelevant
-            '|defer', // $additionalAttributes
-            false,  // $enableAsyncInES6Modules
-            'gsap_scrolltrigger' // $dependencies
+            '|',
+            false,
+            '',
+            true
         );
 
         // Load Preview-Bundle
@@ -305,9 +310,10 @@ class AnimationPreviewField extends AbstractFormElement
             false, // $forceOnTop
             '',    // $allWrap
             true,  // $typo3PageModuleRelevant
-            '|defer', // $additionalAttributes
-            false, // $enableAsyncInES6Modules
-            'content_gsap_animation_definitions' // $dependencies
+            '|',
+            false,
+            '',
+            true
         );
 
         return $result;
@@ -353,7 +359,8 @@ class AnimationPreviewField extends AbstractFormElement
             $validationRules[] = ['type' => 'required'];
         }
 
-        return json_encode($validationRules) ?: '[]';
+        $validationRulesJson = json_encode($validationRules);
+        return is_string($validationRulesJson) ? $validationRulesJson : '[]';
     }
 
     protected function renderFieldInformation(): array

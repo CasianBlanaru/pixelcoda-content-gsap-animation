@@ -102,6 +102,11 @@
 				<source>Preview</source>
 				<target>Vorschau</target>
 			</trans-unit>
+
+			<trans-unit id="preview-help" xml:space="preserve">
+				<source>Respects reduced motion.</source>
+				<target>Respektiert reduzierte Bewegung.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

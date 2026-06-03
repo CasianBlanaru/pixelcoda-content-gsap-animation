@@ -27,7 +27,7 @@ class FileContentContentObject extends AbstractContentObject
     /**
      * Renders the content of a file based on the given configuration.
      *
-     * @param array<string,mixed> $conf The configuration for rendering the file content. It can contain the following keys:
+     * @param array $conf The configuration for rendering the file content. It can contain the following keys:
      *                    - 'file': The path to the file.
      *                    - 'file.': Additional configuration for the 'file' parameter.
      * @return string The content of the file. If the file does not exist or cannot be read, an empty string is returned.

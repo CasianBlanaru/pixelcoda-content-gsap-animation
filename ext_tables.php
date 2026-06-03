@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('TYPO3_MODE') && !defined('TYPO3')) {
+if (!defined('TYPO3')) {
     die ('Access denied.');
 }
 
@@ -10,9 +10,12 @@ $typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\
 // get extensionConfiguration for 'content_gsap_animation'
 $extensionManagementUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class);
 $extensionConfiguration = $extensionManagementUtility->get('content_gsap_animation');
+$disableAddAnimationsTab = (bool)($extensionConfiguration['disableAddAnimationsTab'] ?? false);
+$extendedAnimationSettings = (bool)($extensionConfiguration['extendedAnimationSettings'] ?? false);
+$hideFooterAnimationLabel = (bool)($extensionConfiguration['hideFooterAnimationLabel'] ?? false);
 
 // add animation tab to all CTypes if not disabled via extension settings
-if (!$extensionConfiguration['disableAddAnimationsTab'] && !$extensionConfiguration['extendedAnimationSettings']) {
+if (!$disableAddAnimationsTab && !$extendedAnimationSettings) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', '
     --div--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:tab.animation,
     --palette--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:palette.animation-settings;
@@ -24,7 +27,7 @@ if (!$extensionConfiguration['disableAddAnimationsTab'] && !$extensionConfigurat
 }
 
 // extended animation settings for all CTypes
-if (!$extensionConfiguration['disableAddAnimationsTab'] && $extensionConfiguration['extendedAnimationSettings']) {
+if (!$disableAddAnimationsTab && $extendedAnimationSettings) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', '
 	--div--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:tab.animation,
 	--palette--;LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:palette.animation-settings;
@@ -39,7 +42,13 @@ if (!$extensionConfiguration['disableAddAnimationsTab'] && $extensionConfigurati
 
 // add own footer partial to containerConfiguration if TYPO3 > v11 and ext: container is installed and used
 if ($typo3Version->getMajorVersion() > 11) {
-    if (empty($extensionConfiguration['hideFooterAnimationLabel']) || !$extensionConfiguration['hideFooterAnimationLabel']) {
+    if (!$hideFooterAnimationLabel) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+            'content_gsap_animation',
+            'Configuration/page.tsconfig',
+            'Content GSAP Animation'
+        );
+
         $containerConfiguration = &$GLOBALS['TCA']['tt_content']['containerConfiguration'] ?? null;
         if ($containerConfiguration) {
             foreach (array_keys($containerConfiguration) as $cType) {

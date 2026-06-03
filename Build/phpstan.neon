@@ -12,10 +12,12 @@ parameters:
 	excludePaths:
 		- ../Resources/
 	ignoreErrors:
-		- "#Call to an undefined method TYPO3\\CMS\\Core\\Configuration\\ExtensionConfiguration::get\\(\\)#"
-		- "#Call to an undefined method TYPO3\\CMS\\Core\\Utility\\GeneralUtility::makeInstance\\(\\)#"
+		- '#Call to an undefined method TYPO3\\CMS\\Core\\Configuration\\ExtensionConfiguration::get\(\)#'
+		- '#Call to an undefined method TYPO3\\CMS\\Core\\Utility\\GeneralUtility::makeInstance\(\)#'
 		- "#Casting to string something that's already string.#"
-		- "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
+		- '#^Call to an undefined method TYPO3Fluid\\Fluid\\Core\\Rendering\\RenderingContextInterface\\:\\:getRequest\(\)\.$#'
+		-
+			identifier: missingType.iterableValue
+		-
+			identifier: missingType.generics
 	reportUnmatchedIgnoredErrors: false
-	checkGenericClassInNonGenericObjectType: false
-	checkMissingIterableValueType: false
