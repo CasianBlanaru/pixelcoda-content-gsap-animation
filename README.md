@@ -1,54 +1,119 @@
 # Content GSAP Animation
 
-<img src="ext_icon.svg" alt="Content GSAP Animation Icon" width="100" height="100"/>
+<img src="ext_icon.svg" alt="Content GSAP Animation icon" width="100" height="100"/>
 
-## Overview
+GSAP-powered scroll animations for TYPO3 content elements. Editors choose an animation in the content element form; the extension renders the required `data-gsap-*` attributes and initializes GSAP ScrollTrigger in the frontend.
 
-GSAP (GreenSock Animation Platform) powered animations for your TYPO3 content elements. This extension provides a simple way to add professional, smooth animations to any content element when it enters the viewport. Perfect for creating engaging and interactive websites without writing complex JavaScript.
+![Animation preview](Documentation/Images/Example.gif)
 
-### What does it do
+## Highlights
 
-`content_gsap_animation` is an extension for the TYPO3 content management system.
+- TYPO3 12.4, 13.4 and 14.3 compatible
+- Fluid Styled Content support
+- Bootstrap Package v13, v14 and v15 support
+- Fade, slide, zoom and flip animation presets
+- Backend preview with duration, delay and easing support
+- Extended settings for offset, anchor placement, once and mirror behavior
+- BITV-friendly behavior via `prefers-reduced-motion`
+- Headless-ready structured animation data for custom renderers and APIs
+- Local vendored GSAP and ScrollTrigger assets, no CDN dependency
 
-It allows you to set frontend animations to your content if its scrolled into the browsers viewport with bidirectional animation support (animations play in reverse when scrolling back up).\
+## Installation
 
-### Dependencies
-The extension is developed and tested with TYPO3 12.4 until 13.4 LTS. It has an out of the box `bootstrap_package v13, v14 and v15` and `fluid_styled_content` support.
+```bash
+composer require pixelcoda/content-gsap-animation
+```
 
-### Configuration
-Include the static TypoScript for `Content GSAP Animation: bootstrap_package v13, v14 or v15` or `Content GSAP Animation: fluid_styled_content` to your template and you can start animating.
+Then run TYPO3 extension setup:
 
-### Extending
-`content_gsap_animation` comes with an extended `Default` fluid layout which adds the necessary markup to get the animations working. If you want to extend the layout just copy it to your extension, remove or update the content elements `layoutRootPaths` and you're good to go.
+```bash
+vendor/bin/typo3 extension:setup
+```
 
-## Animation System Internals
+## TYPO3 Setup
 
-This section provides details for developers looking to understand or customize the animation system.
+Include the matching TypoScript setup for your rendering stack:
 
-### Centralized Animation Definitions
+- `Content GSAP Animation: Fluid Styled Content`
+- `Content GSAP Animation: Bootstrap Package v13.x`
+- `Content GSAP Animation: Bootstrap Package v14.x`
+- `Content GSAP Animation: Bootstrap Package v15.x`
 
-The core GSAP animation keyframes (the `from` and `to` states) are now defined in a centralized JavaScript file:
-`Resources/Public/JavaScript/Core/animation-definitions.js`.
+The Bootstrap Package number refers to the Bootstrap Package major version, not the TYPO3 major version.
 
-If you need to add new animation types or modify the fundamental properties (like starting/ending positions, opacity, scale, rotation, etc.) of existing animations, this is the primary file to edit. Both the backend preview and the frontend rendering use these definitions.
+## Editor Usage
 
-### Enhanced Backend Preview
+Open a content element and use the **Animation** tab. Select an animation preset and adjust timing. If extended settings are enabled in the extension configuration, editors can also set offset, anchor placement, once and mirror behavior.
 
-The animation preview in the TYPO3 backend has been improved to offer a more accurate visual representation of how content elements will animate. Key improvements include:
+Existing documentation screenshots:
 
-*   A more content-like placeholder for the preview.
-*   The preview now accurately reflects the configured `duration`, `delay`, and `easing` settings selected in the content element's animation configuration.
+- [Animation tab](Documentation/Images/Settings/animation-tab.png)
+- [Extended settings](Documentation/Images/Settings/extended-settings.png)
+- [Footer label](Documentation/Images/Settings/footer-label.png)
 
-### Frontend Customization via Data Attributes
+## Accessibility
 
-While the core animation definitions are centralized, the behavior of individual content element animations on the frontend can be further customized using `data-gsap-*` attributes directly in your Fluid templates or content element markup. These attributes include:
+The frontend script respects `prefers-reduced-motion: reduce`. If the visitor has reduced motion enabled, animation attributes are ignored and elements remain visible without transform or opacity animation.
 
-*   `data-gsap-duration`: Overrides the default duration (in milliseconds).
-*   `data-gsap-delay`: Sets a delay before the animation starts (in milliseconds).
-*   `data-gsap-easing`: Specifies a GSAP easing function (e.g., `power2.inOut`, `bounce.out`).
-*   `data-gsap-once`: Set to `true` if the animation should only play once when scrolling down. By default, animations replay when scrolling up and down past the element.
+## Headless Usage
 
-This approach allows for fine-tuning animations on a per-element basis without altering the core definitions.
+The data processor now exposes both rendered HTML attributes and structured animation data:
 
-## More Informations
-See the [official documentation](https://docs.typo3.org/p/pixelcoda/content-gsap-animation/main/en-us/) for more details how to implement content_gsap_animation
+- `animationSettings`: raw HTML attribute string for Fluid layouts
+- `gsapAnimationSettings`: legacy raw HTML attribute string
+- `animationSettingsData`: structured array for headless/API usage
+- `gsapAnimationSettingsData`: legacy structured array alias
+
+Example structured data:
+
+```json
+{
+  "animation": "fade-up",
+  "duration": 800,
+  "delay": 0,
+  "easing": "power2.out",
+  "offset": 120,
+  "anchorPlacement": "top-center",
+  "once": true,
+  "mirror": false
+}
+```
+
+Custom Fluid layouts can keep using:
+
+```html
+{f:if(condition: animationSettings, then: '{animationSettings -> f:format.raw()}')}
+```
+
+Headless renderers should consume `animationSettingsData` and decide in the frontend application whether to use GSAP, native CSS, or no animation.
+
+## Development
+
+Install PHP dependencies:
+
+```bash
+composer update --prefer-dist
+```
+
+Build JavaScript bundles:
+
+```bash
+cd Resources/Public
+yarn install
+yarn build
+```
+
+Run checks:
+
+```bash
+composer test
+composer test:functional
+```
+
+Functional tests require TYPO3 Testing Framework database credentials. With DDEV, use root credentials so the test runner can create temporary databases.
+
+## Documentation
+
+Full documentation is available at:
+
+https://docs.typo3.org/p/pixelcoda/content-gsap-animation/main/en-us/

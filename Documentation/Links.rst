@@ -13,10 +13,10 @@ Links
    https://extensions.typo3.org/extension/content_gsap_animation/
 
 :Issues:
-   https://github.com/pixelcoda/content-gsap-animation/issues
+   https://github.com/CasianBlanaru/pixelcoda-content-gsap-animation/issues
 
 :GitHub:
-   https://github.com/pixelcoda/content-gsap-animation
+   https://github.com/CasianBlanaru/pixelcoda-content-gsap-animation
 
 :Contact:
    `@pixelcoda <https://twitter.com/pixelcoda>`__

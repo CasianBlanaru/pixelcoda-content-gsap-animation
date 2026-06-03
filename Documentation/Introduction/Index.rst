@@ -17,6 +17,8 @@ This extension allows you to set up frontend animations for your content element
 
 The animations are based on the powerful GSAP library (GreenSock Animation Platform) with the ScrollTrigger plugin, which provides smooth, high-performance animations that work when scrolling both down and up.
 
+The extension supports classic TYPO3 rendering with Fluid Styled Content or Bootstrap Package and also exposes structured animation data for headless renderers.
+
 
 .. _screenshots:
 
@@ -40,5 +42,7 @@ Features
 * Animations trigger when scrolling down and up
 * Powerful GSAP-based implementation
 * Responsive and accessible animations
+* Respects the visitor's ``prefers-reduced-motion`` setting
 * Full TYPO3 backend integration with live preview
 * Compatible with Bootstrap Package and Fluid Styled Content
+* Headless-ready structured animation settings

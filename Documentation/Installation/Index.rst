@@ -10,7 +10,22 @@ Installation
 
 The extension must be installed like any other TYPO3 CMS extension.
 
-If you use Composer, you can simply require this extension via ``composer req pixelcoda/content-gsap-animation``.
+If you use Composer, require this extension via:
+
+.. code-block:: bash
+
+   composer require pixelcoda/content-gsap-animation
+
+Then run the TYPO3 extension setup:
+
+.. code-block:: bash
+
+   vendor/bin/typo3 extension:setup
+
+Compatibility
+=============
+
+Version 3.2 supports TYPO3 12.4, TYPO3 13.4 and TYPO3 14.3.
 
 Setup
 =====

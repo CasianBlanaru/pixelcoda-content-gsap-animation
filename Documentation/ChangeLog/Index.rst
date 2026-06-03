@@ -12,6 +12,25 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.2.0 - 2026-06-03
+==================
+
+Added
+-----
+
+* Added TYPO3 14.3 compatibility.
+* Added structured ``animationSettingsData`` for headless and API renderers.
+* Added test coverage for extended animation settings and structured data output.
+
+Changed
+-------
+
+* Modernized backend preview UI.
+* Frontend animations now respect ``prefers-reduced-motion``.
+* Updated TCA to modern TYPO3 number fields and array item format.
+* Replaced obsolete PageTS registration with a PageTSConfig file.
+* Updated README and documentation with screenshots, accessibility and headless notes.
+
 3.0.1 - 2025-05-07
 ===================
 

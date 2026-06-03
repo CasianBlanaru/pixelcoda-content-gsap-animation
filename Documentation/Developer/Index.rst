@@ -39,6 +39,36 @@ Here's an example of how the rendered HTML should look:
   </div>
 
 
+Headless Rendering
+==================
+
+The data processor exposes both raw HTML attributes and structured data. Classic Fluid layouts can use the raw string, while headless renderers can use the structured array.
+
+Available processed variables:
+
+* ``animationSettings``: raw HTML attribute string for Fluid layouts.
+* ``gsapAnimationSettings``: legacy raw HTML attribute string.
+* ``animationSettingsData``: structured animation data for APIs and headless renderers.
+* ``gsapAnimationSettingsData``: legacy structured data alias.
+
+Example structured data:
+
+.. code-block:: json
+
+   {
+     "animation": "fade-up",
+     "duration": 800,
+     "delay": 0,
+     "easing": "power2.out",
+     "offset": 120,
+     "anchorPlacement": "top-center",
+     "once": true,
+     "mirror": false
+   }
+
+Headless frontends should use this data to decide how animations are implemented. They can use GSAP, CSS transitions, native framework animations or no animation at all.
+
+
 Extension
 =========
 
@@ -125,3 +155,8 @@ The following animation types are available:
 - slide-right
 
 You can use these in your own layouts with the corresponding data attributes.
+
+Accessibility
+=============
+
+The frontend JavaScript checks ``prefers-reduced-motion``. When reduced motion is active, animation attributes are ignored and no opacity or transform animation is applied.

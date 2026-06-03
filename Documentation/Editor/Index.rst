@@ -21,6 +21,11 @@ The screenshot below shows how you can set up an animation. You have the option 
 
    The animations are implemented with GSAP (GreenSock Animation Platform), which provides smooth animations and better performance. The animations are triggered when scrolling both down and up.
 
+Accessibility
+=============
+
+Animations are automatically disabled for visitors who enabled reduced motion in their operating system or browser. This keeps the content visible and avoids motion that can be distracting or uncomfortable.
+
 
 Screenshot
 ==========
@@ -47,3 +52,19 @@ The following animation types are available:
 - **flip-down**: Element flips in from above
 - **slide-left**: Element slides in from the left
 - **slide-right**: Element slides in from the right
+
+Extended Settings
+=================
+
+Administrators can enable extended animation settings in the extension configuration. Editors can then adjust:
+
+- **Offset**: Starts the animation earlier or later relative to the viewport.
+- **Anchor placement**: Defines where the trigger starts.
+- **Play animation once**: Keeps an animation from replaying.
+- **Mirror**: Reverses animation behavior when scrolling back.
+
+.. figure:: ../Images/Settings/extended-settings.png
+   :width: 860px
+   :alt: Extended animation settings in the TYPO3 backend
+
+   Extended animation settings for advanced editorial control

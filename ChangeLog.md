@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.2.0 - 2026-06-03
+### Added
+- [FEATURE] Added TYPO3 14.3 compatibility.
+- [FEATURE] Added structured `animationSettingsData` for headless/API renderers.
+- [FEATURE] Added tests for extended GSAP settings and structured animation data.
+
+### Changed
+- [IMPROVEMENT] Modernized backend preview UI and language labels.
+- [IMPROVEMENT] Frontend animations now respect `prefers-reduced-motion`.
+- [IMPROVEMENT] Updated TCA to modern TYPO3 number fields and array item format.
+- [IMPROVEMENT] Removed obsolete PageRenderer hook workaround and registered PageTS via file.
+- [IMPROVEMENT] Updated README and TYPO3 documentation with screenshots, accessibility and headless notes.
+
 ## 3.0.5 - 2024-06-25
 ### Changed
 - [IMPROVEMENT] Improved language consistency in JavaScript comments and error messages
@@ -35,4 +48,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [FEATURE] optimized performance through efficient JavaScript bundle structure
 - [FEATURE] advanced error detection and handling for missing libraries
 - [FEATURE] full documentation with examples for all animation types
-

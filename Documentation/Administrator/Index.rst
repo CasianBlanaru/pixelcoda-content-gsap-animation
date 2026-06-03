@@ -22,6 +22,11 @@ Settings
 | extendedAnimationSettings    | boolean       | Activate extended animation settings (for advanced users only)    | false         |
 +------------------------------+---------------+-------------------------------------------------------------------+---------------+
 
+Compatibility
+=============
+
+Version 3.2 supports TYPO3 12.4, TYPO3 13.4 and TYPO3 14.3. TYPO3 14 projects should use Composer mode and run ``vendor/bin/typo3 extension:setup`` after installing or updating the extension.
+
 Animation Footer Label
 ======================
 
