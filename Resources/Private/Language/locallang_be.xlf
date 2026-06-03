@@ -44,7 +44,7 @@
 			</trans-unit>
 
 			<trans-unit id="desc.once" xml:space="preserve">
-				<source>Whether animation should happen only once - while scrolling down</source>
+				<source>Play the animation only once when the element enters the viewport.</source>
 			</trans-unit>
 
 			<trans-unit id="label.mirror" xml:space="preserve">
@@ -52,7 +52,7 @@
 			</trans-unit>
 
 			<trans-unit id="desc.mirror" xml:space="preserve">
-				<source>Animations animates out while scrolling past them</source>
+				<source>Reverse the animation when the element leaves the viewport while scrolling.</source>
 			</trans-unit>
 
 			<trans-unit id="label.anchor-placement" xml:space="preserve">
@@ -88,7 +88,7 @@
 			</trans-unit>
 
 			<trans-unit id="preview-help" xml:space="preserve">
-				<source>Motion-safe. Headless-ready.</source>
+				<source>GSAP ScrollTrigger preview with reduced-motion and headless support.</source>
 			</trans-unit>
 		</body>
 	</file>

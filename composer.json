@@ -1,14 +1,21 @@
 {
 	"name": "pixelcoda/content-gsap-animation",
 	"type": "typo3-cms-extension",
-	"description": "TYPO3 CMS extension to have some fun and animate your content elements",
+	"description": "TYPO3 CMS extension for GSAP ScrollTrigger animations on content elements with editor presets, backend preview, Bootstrap Package support and headless-ready animation data.",
 	"homepage": "https://www.pixelcoda.de",
 	"keywords": [
 		"typo3",
-		"TYPO3 CMS",
-		"tools",
-		"animations",
+		"typo3-cms",
+		"gsap",
+		"greensock",
+		"scrolltrigger",
+		"scroll-animation",
+		"content-elements",
+		"animation-presets",
 		"frontend",
+		"fluid-styled-content",
+		"bootstrap-package",
+		"headless",
 		"pixelcoda"
 	],
 	"license": [

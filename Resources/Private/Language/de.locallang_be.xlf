@@ -54,8 +54,8 @@
 			</trans-unit>
 
 			<trans-unit id="desc.once" xml:space="preserve">
-				<source>Whether animation should happen only once - while scrolling down</source>
-				<target>Animation wird nur einmalig, beim herunterscrollen, abgespielt</target>
+				<source>Play the animation only once when the element enters the viewport.</source>
+				<target>Spielt die Animation nur einmal ab, wenn das Element in den sichtbaren Bereich scrollt.</target>
 			</trans-unit>
 
 			<trans-unit id="label.mirror" xml:space="preserve">
@@ -64,8 +64,8 @@
 			</trans-unit>
 
 			<trans-unit id="desc.mirror" xml:space="preserve">
-				<source>Animations animates out while scrolling past them</source>
-				<target>Animation wird beim herunterscrollen gespiegelt ausgeblendet</target>
+				<source>Reverse the animation when the element leaves the viewport while scrolling.</source>
+				<target>Spielt die Animation rueckwaerts ab, wenn das Element beim Scrollen den sichtbaren Bereich verlaesst.</target>
 			</trans-unit>
 
 			<trans-unit id="label.anchor-placement" xml:space="preserve">
@@ -80,22 +80,22 @@
 
 			<trans-unit id="item.fade-animations" xml:space="preserve">
 				<source>Fade animations:</source>
-				<target>Fade Animationen:</target>
+				<target>Fade-Animationen:</target>
 			</trans-unit>
 
 			<trans-unit id="item.flip-animations" xml:space="preserve">
 				<source>Flip animations:</source>
-				<target>Flip Animationen:</target>
+				<target>Flip-Animationen:</target>
 			</trans-unit>
 
 			<trans-unit id="item.slide-animations" xml:space="preserve">
 				<source>Slide animations:</source>
-				<target>Slide Animationen:</target>
+				<target>Slide-Animationen:</target>
 			</trans-unit>
 
 			<trans-unit id="item.zoom-animations" xml:space="preserve">
 				<source>Zoom animations:</source>
-				<target>Zoom Animationen:</target>
+				<target>Zoom-Animationen:</target>
 			</trans-unit>
 
 			<trans-unit id="preview-label" xml:space="preserve">
@@ -104,8 +104,8 @@
 			</trans-unit>
 
 			<trans-unit id="preview-help" xml:space="preserve">
-				<source>Motion-safe. Headless-ready.</source>
-				<target>Motion-safe. Headless-ready.</target>
+				<source>GSAP ScrollTrigger preview with reduced-motion and headless support.</source>
+				<target>GSAP-ScrollTrigger-Vorschau mit Reduced-Motion- und Headless-Unterstuetzung.</target>
 			</trans-unit>
 		</body>
 	</file>

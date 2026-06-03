@@ -22,10 +22,10 @@ Content GSAP Animation
       en
 
    :Description:
-      This extension allows you to add engaging GSAP-based animations to your content elements when they are scrolled into the browser's viewport.
+      TYPO3 extension for GSAP ScrollTrigger animations on content elements, including editor presets, backend preview, Fluid Styled Content, Bootstrap Package support, reduced-motion handling and headless-ready animation data.
 
    :Keywords:
-      animations,scroll,effects,content,fx,gsap,greensock,scrolltrigger,animate,fluid,styled
+      typo3,extension,animations,scroll,effects,content-elements,gsap,greensock,scrolltrigger,fluid-styled-content,bootstrap-package,headless,reduced-motion
 
    :Copyright:
       2024
