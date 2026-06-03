@@ -12,6 +12,14 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.5.3 - 2026-06-03
+==================
+
+Added
+-----
+
+* Added an original TYPO3 backend settings-flow GIF showing the animation tab, preset changes, preview and timing controls.
+
 3.5.2 - 2026-06-03
 ==================
 

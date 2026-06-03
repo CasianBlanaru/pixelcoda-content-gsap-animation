@@ -42,6 +42,12 @@ Screenshot
 
    Animated backend preview showing the GSAP animation preview behavior
 
+.. figure:: ../Images/Settings/backend-settings-animation-flow.gif
+   :width: 900px
+   :alt: Original TYPO3 backend animation settings flow
+
+   Original TYPO3 backend flow showing animation settings, preset changes and timing controls
+
 The backend preview also shows GIF examples for common presets such as fade, slide, zoom and flip. Editors can compare the animation possibilities directly in the content element form.
 
 Available Animation Types

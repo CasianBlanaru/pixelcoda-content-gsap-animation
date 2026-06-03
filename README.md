@@ -51,6 +51,7 @@ The backend preview shows the selected animation on a content-card mockup and di
 Existing documentation screenshots:
 
 - [Premium preview](Documentation/Images/Settings/premium-preview.png)
+- [Original TYPO3 backend settings flow GIF](Documentation/Images/Settings/backend-settings-animation-flow.gif)
 - [Animated backend preview GIF](Documentation/Images/Settings/backend-animation-preview.gif)
 - [Animation tab](Documentation/Images/Settings/animation-tab.png)
 - [Extended settings](Documentation/Images/Settings/extended-settings.png)
