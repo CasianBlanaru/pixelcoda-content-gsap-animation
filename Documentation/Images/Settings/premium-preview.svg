@@ -30,21 +30,21 @@
     <text x="58" y="26" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#134e4a">Preview</text>
   </g>
 
-  <g transform="translate(1082 102)">
+  <g transform="translate(1110 102)">
     <image href="../../../Resources/Public/Images/gsap-greensock.svg" x="0" y="0" width="48" height="56" preserveAspectRatio="xMidYMid meet"/>
     <circle cx="24" cy="28" r="22" fill="#84cc16"/>
     <path d="M10 32c10-6 16-16 28-18-4 9-10 18-22 25 4-1 10-3 18-8-6 10-14 16-26 17 4-5 6-9 2-16z" fill="#0f172a" opacity=".9"/>
     <text x="68" y="25" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#334155">GreenSock</text>
-    <text x="68" y="50" font-family="Inter, Arial, sans-serif" font-size="14" fill="#64748b">Headless automatic.</text>
+    <text x="68" y="50" font-family="Inter, Arial, sans-serif" font-size="14" fill="#64748b">GSAP</text>
   </g>
 
   <g transform="translate(100 188)">
-    <rect width="332" height="292" rx="12" fill="#ffffff" fill-opacity=".56" stroke="#94a3b8" stroke-opacity=".45"/>
+    <rect width="392" height="292" rx="12" fill="#ffffff" fill-opacity=".56" stroke="#94a3b8" stroke-opacity=".45"/>
     <rect x="28" y="28" width="108" height="26" rx="13" fill="#84cc16" fill-opacity=".22"/>
     <text x="82" y="46" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#0f766e">ScrollTrigger</text>
-    <text x="28" y="100" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="800" fill="#111827">Animation preview</text>
-    <text x="28" y="142" font-family="Inter, Arial, sans-serif" font-size="16" fill="#475569">GSAP with reduced motion.</text>
-    <line x1="28" y1="182" x2="292" y2="182" stroke="#cbd5e1"/>
+    <text x="28" y="100" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#111827">Animation preview</text>
+    <text x="28" y="142" font-family="Inter, Arial, sans-serif" font-size="16" fill="#475569">GSAP with reduced-motion support.</text>
+    <line x1="28" y1="182" x2="332" y2="182" stroke="#cbd5e1"/>
     <text x="28" y="212" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#334155">Headless output is automatic.</text>
     <text x="28" y="238" font-family="Inter, Arial, sans-serif" font-size="14" fill="#64748b">Use animationSettingsData in APIs.</text>
     <rect x="28" y="258" width="104" height="30" rx="15" fill="#f8fafc" stroke="#cbd5e1"/>
@@ -53,12 +53,12 @@
     <text x="226" y="278" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#64748b">Headless auto</text>
   </g>
 
-  <g transform="translate(464 188)">
-    <rect width="836" height="292" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
-    <line x1="72" y1="58" x2="764" y2="58" stroke="#0f766e" stroke-width="2" opacity=".55"/>
+  <g transform="translate(524 188)">
+    <rect width="776" height="292" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <line x1="72" y1="58" x2="704" y2="58" stroke="#0f766e" stroke-width="2" opacity=".55"/>
     <circle cx="178" cy="58" r="8" fill="#0f766e"/>
-    <circle cx="658" cy="58" r="8" fill="#0f766e"/>
-    <g transform="translate(206 100)">
+    <circle cx="618" cy="58" r="8" fill="#0f766e"/>
+    <g transform="translate(176 100)">
       <rect width="424" height="132" rx="12" fill="#ffffff" stroke="#94a3b8"/>
       <rect x="18" y="18" width="120" height="96" rx="8" fill="#0f766e"/>
       <rect x="18" y="18" width="120" height="96" rx="8" fill="url(#glowA)" opacity=".85"/>

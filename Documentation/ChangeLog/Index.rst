@@ -12,6 +12,16 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.5.1 - 2026-06-03
+==================
+
+Fixed
+-----
+
+* Shortened backend preview copy so text cannot leave the preview panel.
+* Reduced the top GSAP branding to a compact logo label.
+* Regenerated documentation and release preview images without clipped text.
+
 3.5.0 - 2026-06-03
 ==================
 

@@ -212,7 +212,6 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '</div>';
 
         $previewLabel = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-label');
-        $previewHelp = LocalizationUtility::translate('LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:preview-help');
         $gsapLogoPath = GeneralUtility::getFileAbsFileName(
             'EXT:content_gsap_animation/Resources/Public/Images/gsap-greensock.svg'
         );
@@ -223,15 +222,15 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<span class="preview-label" data-show-preview="false">' . htmlspecialchars((string)($previewLabel ?? ''), ENT_COMPAT, 'UTF-8', false) . '</span>';
         $html[] = '<span class="preview-brand">';
         $html[] = '<span class="preview-brand-logo" style="background-image: url(' . htmlspecialchars($gsapLogoWebPath, ENT_COMPAT, 'UTF-8', false) . ');" aria-hidden="true"></span>';
-        $html[] = '<span>' . htmlspecialchars((string)($previewHelp ?? ''), ENT_COMPAT, 'UTF-8', false) . '</span>';
+        $html[] = '<span>GSAP</span>';
         $html[] = '</span>';
         $html[] = '</div>';
         $html[] = '<div class="preview-shell">';
         $html[] = '<div class="preview-copy" aria-hidden="true">';
         $html[] = '<span class="preview-kicker">ScrollTrigger</span>';
         $html[] = '<span class="preview-title">Animation preview</span>';
-        $html[] = '<span class="preview-description">GSAP animation with reduced-motion support.</span>';
-        $html[] = '<span class="preview-headless-note">Headless output is automatic: use animationSettingsData.</span>';
+        $html[] = '<span class="preview-description">GSAP with reduced-motion support.</span>';
+        $html[] = '<span class="preview-headless-note">Headless is automatic. Use animationSettingsData.</span>';
         $html[] = '</div>';
         $html[] = '<div class="preview-stage">';
         $html[] = '<div class="preview-stage__rail" aria-hidden="true"></div>';

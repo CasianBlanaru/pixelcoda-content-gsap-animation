@@ -55,11 +55,13 @@
 
 #preview-content-animation .preview-brand {
     gap: 8px;
-    max-width: 58%;
+    flex: 0 0 auto;
+    max-width: 140px;
     color: var(--pc-preview-muted);
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 800;
     text-align: right;
+    white-space: nowrap;
 }
 
 #preview-content-animation .preview-brand-logo {
@@ -81,7 +83,7 @@
 
 #preview-content-animation .preview-shell {
     display: grid;
-    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
     gap: 16px;
     align-items: stretch;
     min-width: 0;
@@ -121,7 +123,7 @@
 
 #preview-content-animation .preview-description,
 #preview-content-animation .preview-headless-note {
-    max-width: 24ch;
+    max-width: 30ch;
     color: var(--pc-preview-panel-muted);
     font-size: 13px;
     line-height: 1.45;
@@ -130,7 +132,7 @@
 
 #preview-content-animation .preview-headless-note {
     display: block;
-    max-width: 28ch;
+    max-width: 32ch;
     margin-top: 14px;
     padding-top: 12px;
     border-top: 1px solid rgb(148 163 184 / 32%);
@@ -338,7 +340,6 @@
 
     #preview-content-animation .preview-brand {
         align-self: flex-start;
-        max-width: 100%;
         text-align: left;
     }
 
