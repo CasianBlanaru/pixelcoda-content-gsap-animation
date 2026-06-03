@@ -12,6 +12,20 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.5.5 - 2026-06-03
+==================
+
+Changed
+-------
+
+* Reduced backend preview height and visual dominance in the Animation tab.
+* Made the preview copy more concise and compact.
+
+Fixed
+-----
+
+* Aligned the animation select icon inside the input group.
+
 3.5.4 - 2026-06-03
 ==================
 

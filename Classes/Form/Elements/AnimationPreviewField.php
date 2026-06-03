@@ -190,7 +190,7 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<div class="form-wizards-wrap">';
         $html[] = '<div class="form-wizards-element">';
         if ($hasIcons) {
-            $html[] = '<div class="input-group">';
+            $html[] = '<div class="input-group pc-animation-select">';
             $html[] = '<span class="input-group-addon input-group-icon">';
             $html[] = $selectedIcon;
             $html[] = '</span>';
@@ -227,9 +227,9 @@ class AnimationPreviewField extends AbstractFormElement
         $html[] = '<div class="preview-shell">';
         $html[] = '<div class="preview-copy" aria-hidden="true">';
         $html[] = '<span class="preview-kicker">ScrollTrigger</span>';
-        $html[] = '<span class="preview-title">Animation preview</span>';
-        $html[] = '<span class="preview-description">GSAP with reduced-motion support.</span>';
-        $html[] = '<span class="preview-headless-note">Headless is automatic. Use animationSettingsData.</span>';
+        $html[] = '<span class="preview-title">Preview</span>';
+        $html[] = '<span class="preview-description">Live GSAP preview with reduced-motion support.</span>';
+        $html[] = '<span class="preview-headless-note">Headless data: automatic</span>';
         $html[] = '</div>';
         $html[] = '<div class="preview-stage">';
         $html[] = '<div class="preview-stage__rail" aria-hidden="true"></div>';
