@@ -42,6 +42,19 @@
                 return Number.isFinite(parsedValue) && parsedValue >= 0 ? parsedValue / 1000 : fallback;
             };
 
+            const containsReadableText = (element) => {
+                return (element.textContent || '').replace(/\s+/g, ' ').trim().length > 0;
+            };
+
+            const keepTextVisible = (vars, element) => {
+                if (!containsReadableText(element)) {
+                    return vars;
+                }
+                const safeVars = { ...vars };
+                delete safeVars.opacity;
+                return safeVars;
+            };
+
             const createAnimation = (element) => {
                 const animationType = element.getAttribute('data-gsap-anim') || 'default';
                 const animationDefinition = AnimationDefinitions[animationType] || AnimationDefinitions.default || {
@@ -58,12 +71,12 @@
                 const start = anchorPlacement.replace('-', ' ');
 
                 const fromVars = {
-                    ...animationDefinition.from,
+                    ...keepTextVisible(animationDefinition.from, element),
                     immediateRender: false,
-                    willChange: 'transform,opacity',
+                    willChange: 'transform',
                 };
                 const toVars = {
-                    ...animationDefinition.to,
+                    ...keepTextVisible(animationDefinition.to, element),
                     duration,
                     delay,
                     ease,
