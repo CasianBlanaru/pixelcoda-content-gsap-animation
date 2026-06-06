@@ -9,21 +9,5 @@ lib.contentElement {
     }
     dataProcessing {
         78911002 < plugin.tx_content_gsap_animation.dataProcessing.78911002
-        1682424577.data {
-            data-gsap-anim = TEXT
-            data-gsap-anim.field = tx_content_gsap_animation_animation
-
-            data-gsap-duration = TEXT
-            data-gsap-duration.field = tx_content_gsap_animation_duration
-
-            data-gsap-delay = TEXT
-            data-gsap-delay.field = tx_content_gsap_animation_delay
-
-            data-gsap-easing = TEXT
-            data-gsap-easing.field = tx_content_gsap_animation_easing
-
-            data-gsap-once = TEXT
-            data-gsap-once.field = tx_content_gsap_animation_once
-        }
     }
 }

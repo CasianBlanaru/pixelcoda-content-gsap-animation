@@ -88,7 +88,15 @@ $tempColumns = [
         'config' => [
             'type' => 'number',
             'size' => 5,
+            'range' => [
+                'lower' => -500,
+                'upper' => 500,
+            ],
             'default' => 0,
+            'slider' => [
+                'step' => 10,
+                'width' => 200,
+            ],
         ],
     ],
 

@@ -12,6 +12,22 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.5.16 - 2026-06-06
+===================
+
+Fixed
+-----
+
+* Prevented empty animation values from triggering fallback GSAP animations.
+* Restored the backend offset slider with proper positive and negative value ranges.
+* Fixed TYPO3 backend footer rendering when FormEngine exposes animation fields as arrays.
+
+Changed
+-------
+
+* Kept GSAP data attributes available through the shared content element data processor for all content element types.
+* Improved ScrollTrigger offset handling for anchor placements such as ``top-bottom`` and ``center-center``.
+
 3.5.14 - 2026-06-03
 ===================
 

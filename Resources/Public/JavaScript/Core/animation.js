@@ -3,7 +3,8 @@ const initializeContentGsapAnimations = () => {
         return;
     }
 
-    const animatedElements = Array.from(document.querySelectorAll('[data-gsap-anim]'));
+    const animatedElements = Array.from(document.querySelectorAll('[data-gsap-anim]'))
+        .filter((element) => (element.getAttribute('data-gsap-anim') || '').trim() !== '');
     if (animatedElements.length === 0) {
         return;
     }
@@ -53,7 +54,13 @@ const initializeContentGsapAnimations = () => {
         };
 
         const createAnimation = (element) => {
-            const animationType = element.getAttribute('data-gsap-anim') || 'default';
+            if (element.dataset.gsapInitialized === 'true') {
+                return;
+            }
+            const animationType = (element.getAttribute('data-gsap-anim') || '').trim();
+            if (!animationType) {
+                return;
+            }
             const animationDefinition = AnimationDefinitions[animationType] || AnimationDefinitions.default || {
                 from: { opacity: 0, y: 30 },
                 to: { opacity: 1, y: 0 },
@@ -61,11 +68,13 @@ const initializeContentGsapAnimations = () => {
             const duration = toSeconds(element.getAttribute('data-gsap-duration'), 0.8);
             const delay = toSeconds(element.getAttribute('data-gsap-delay'), 0);
             const ease = element.getAttribute('data-gsap-easing') || 'power2.out';
-            const once = element.getAttribute('data-gsap-once') !== 'false';
-            const mirror = element.getAttribute('data-gsap-mirror') === 'true';
+            const once = ['1', 'true'].includes((element.getAttribute('data-gsap-once') || '').toLowerCase());
+            const mirror = ['1', 'true'].includes((element.getAttribute('data-gsap-mirror') || '').toLowerCase());
             const offset = Number.parseInt(element.getAttribute('data-gsap-offset') || '0', 10);
             const anchorPlacement = element.getAttribute('data-gsap-anchor-placement') || 'top-bottom';
-            const start = anchorPlacement.replace('-', ' ');
+            const [triggerAnchor = 'top', viewportAnchor = 'bottom'] = anchorPlacement.split('-');
+            const offsetSuffix = Number.isFinite(offset) && offset !== 0 ? `+=${offset}` : '';
+            const start = `${triggerAnchor}${offsetSuffix} ${viewportAnchor}`;
 
             const fromVars = {
                 ...keepTextVisible(animationDefinition.from, element),
@@ -83,12 +92,15 @@ const initializeContentGsapAnimations = () => {
             if (ScrollTrigger) {
                 toVars.scrollTrigger = {
                     trigger: element,
-                    start: offset ? `${start}-=${offset}` : start,
+                    start,
                     once,
-                    toggleActions: mirror ? 'play reverse play reverse' : 'play none none none',
+                    toggleActions: once
+                        ? 'play none none none'
+                        : (mirror ? 'play none none reverse' : 'play none play none'),
                 };
             }
 
+            element.dataset.gsapInitialized = 'true';
             gsap.fromTo(element, fromVars, toVars);
         };
 

@@ -10,9 +10,12 @@ $typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\
 // get extensionConfiguration for 'content_gsap_animation'
 $extensionManagementUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class);
 $extensionConfiguration = $extensionManagementUtility->get('content_gsap_animation');
-$disableAddAnimationsTab = (bool)($extensionConfiguration['disableAddAnimationsTab'] ?? false);
-$extendedAnimationSettings = (bool)($extensionConfiguration['extendedAnimationSettings'] ?? false);
-$hideFooterAnimationLabel = (bool)($extensionConfiguration['hideFooterAnimationLabel'] ?? false);
+$toBoolean = static fn (mixed $value, bool $default = false): bool => $value === null
+    ? $default
+    : filter_var($value, FILTER_VALIDATE_BOOLEAN);
+$disableAddAnimationsTab = $toBoolean($extensionConfiguration['disableAddAnimationsTab'] ?? null);
+$extendedAnimationSettings = $toBoolean($extensionConfiguration['extendedAnimationSettings'] ?? null, true);
+$hideFooterAnimationLabel = $toBoolean($extensionConfiguration['hideFooterAnimationLabel'] ?? null);
 
 // add animation tab to all CTypes if not disabled via extension settings
 if (!$disableAddAnimationsTab && !$extendedAnimationSettings) {

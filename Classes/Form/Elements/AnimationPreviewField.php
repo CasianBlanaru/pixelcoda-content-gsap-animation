@@ -143,9 +143,16 @@ class AnimationPreviewField extends AbstractFormElement
             }
         }
 
-        // Fallback icon
-        if ($selectedIcon === '' && isset($selectItemGroups[0]['items'][0]['icon'])) {
-            $selectedIcon = $selectItemGroups[0]['items'][0]['icon'];
+        // Fallback to the first real option icon when "No animation" is selected.
+        if ($selectedIcon === '') {
+            foreach ($selectItemGroups as $selectItemGroup) {
+                foreach (($selectItemGroup['items'] ?? []) as $item) {
+                    if (($item['icon'] ?? '') !== '') {
+                        $selectedIcon = (string) $item['icon'];
+                        break 2;
+                    }
+                }
+            }
         }
 
         // Process groups
@@ -167,7 +174,9 @@ class AnimationPreviewField extends AbstractFormElement
                     $item['selected'] ? ' selected="selected"' : '',
                     htmlspecialchars($item['title'], ENT_COMPAT, 'UTF-8', false)
                 );
-                $hasIcons = $item['icon'] !== '';
+                if ($item['icon'] !== '') {
+                    $hasIcons = true;
+                }
             }
 
             $options .= $optionGroup ? '</optgroup>' : '';
