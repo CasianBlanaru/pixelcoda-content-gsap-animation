@@ -1,13 +1,14 @@
 {namespace cga=Pixelcoda\ContentGsapAnimation\ViewHelpers}
 <f:variable name="animationValue" value="{cga:scalarFieldValue(field: item.record.tx_content_gsap_animation_animation)}" />
-<f:if condition="{item.footerInfo} || {animationValue}">
+<f:variable name="footerInfoValue" value="{cga:scalarFieldValue(field: item.footerInfo)}" />
+<f:if condition="{footerInfoValue} || {animationValue}">
     <div class="t3-page-ce-footer">
         <div class="t3-page-ce-info">
             <f:if condition="{animationValue}">
                 <strong>{f:translate(key: 'LLL:EXT:content_gsap_animation/Resources/Private/Language/locallang_be.xlf:label.animation')}</strong> {animationValue}<br>
             </f:if>
-            <f:if condition="{item.footerInfo}">
-                {item.footerInfo -> f:format.raw()}
+            <f:if condition="{footerInfoValue}">
+                {footerInfoValue -> f:format.raw()}
             </f:if>
         </div>
     </div>

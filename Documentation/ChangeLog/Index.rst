@@ -12,6 +12,14 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+3.5.17 - 2026-06-06
+===================
+
+Fixed
+-----
+
+* Fixed TYPO3 backend footer rendering when ``item.footerInfo`` is provided as an array by FormEngine.
+
 3.5.16 - 2026-06-06
 ===================
 
